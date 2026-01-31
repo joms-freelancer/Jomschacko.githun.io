@@ -1,69 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joms Portfolio | Multi-Language</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .lang-btn { transition: all 0.3s; }
-        .lang-btn:hover { transform: scale(1.1); }
-    </style>
-</head>
-<body class="bg-slate-50 text-gray-800 font-sans">
-
-    <nav class="sticky top-0 bg-white shadow-md p-4 z-50">
-        <div class="max-w-5xl mx-auto flex justify-between items-center">
-            <h1 class="font-bold text-xl text-blue-600">JOMS</h1>
-            <div class="flex space-x-2">
-                <button onclick="changeLang('en')" class="lang-btn px-3 py-1 bg-blue-100 rounded-full text-sm font-medium">English</button>
-                <button onclick="changeLang('ml')" class="lang-btn px-3 py-1 bg-red-100 rounded-full text-sm font-medium">മലയാളം</button>
-                <button onclick="changeLang('hi')" class="lang-btn px-3 py-1 bg-green-100 rounded-full text-sm font-medium">हिन्दी</button>
-                <button onclick="changeLang('ta')" class="lang-btn px-3 py-1 bg-yellow-100 rounded-full text-sm font-medium">தமிழ்</button>
-            </div>
+<main class="max-w-6xl mx-auto mt-10 p-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="p-6 bg-white rounded-2xl shadow-sm border-t-4 border-blue-500">
+            <h3 id="col-1-title" class="text-xl font-bold mb-3 text-blue-600">About Me</h3>
+            <p id="col-1-desc" class="text-gray-600 text-sm">Loading...</p>
         </div>
-    </nav>
 
-  <!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-	<main class="max-w-6xl mx-auto mt-10 p-6">
-		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-			<div class="p-6 bg-white rounded-2xl shadow-sm border-t-4 border-blue-500">
-				<div class="flex justify-center mt-10">
-					<div class="relative">
-						<img alt="Joms" class="w-32 h-32 rounded-full border-4 border-blue-500 shadow-lg object-cover" src="my-photo.jpg">
-						<div class="absolute bottom-1 right-1 w-6 h-6 bg-green-500 border-4 border-white rounded-full"></div>
-					</div>
-				</div>
-				<h3 class="text-xl font-bold mb-3 text-blue-600" id="col-1-title">About Me</h3>
-				<p class="text-gray-600 text-sm leading-relaxed" id="col-1-desc">Loading...</p>
-			</div>
-			<div class="p-6 bg-white rounded-2xl shadow-sm border-t-4 border-green-500">
-				<h3 class="text-xl font-bold mb-3 text-green-600" id="col-2-title">Services</h3>
-				<p class="text-gray-600 text-sm leading-relaxed" id="col-2-desc">Loading...</p>
-			</div>
-			<div class="p-6 bg-white rounded-2xl shadow-sm border-t-4 border-purple-500">
-				<h3 class="text-xl font-bold mb-3 text-purple-600" id="col-3-title">Skills</h3>
-				<p class="text-gray-600 text-sm leading-relaxed" id="col-3-desc">Loading...</p>
-			</div>
-			<div class="p-6 bg-white rounded-2xl shadow-sm border-t-4 border-red-500">
-				<h3 class="text-xl font-bold mb-3 text-red-600" id="col-4-title">Contact</h3>
-				<p class="text-gray-600 text-sm leading-relaxed" id="col-4-desc">Loading...</p>
-			</div>
-		</div>
-	</main>
-</body>
-</html>
+        <div class="p-6 bg-white rounded-2xl shadow-sm border-t-4 border-green-500">
+            <h3 id="col-2-title" class="text-xl font-bold mb-3 text-green-600">Services</h3>
+            <p id="col-2-desc" class="text-gray-600 text-sm">Loading...</p>
+        </div>
 
-    <footer class="mt-20 py-10 bg-slate-900 text-white text-center">
-        <p id="contact-text">Contact me for projects</p>
-        <p class="font-bold mt-2 text-blue-400 underline">joms@example.com</p>
-    </footer>
+        <div class="p-6 bg-white rounded-2xl shadow-sm border-t-4 border-purple-500">
+            <h3 id="col-3-title" class="text-xl font-bold mb-3 text-purple-600">Skills</h3>
+            <p id="col-3-desc" class="text-gray-600 text-sm">Loading...</p>
+        </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
+        <div class="p-6 bg-white rounded-2xl shadow-sm border-t-4 border-red-500">
+            <h3 id="col-4-title" class="text-xl font-bold mb-3 text-red-600">Contact</h3>
+            <p id="col-4-desc" class="text-gray-600 text-sm">Loading...</p>
+        </div>
+
+    </div>
+</main>
