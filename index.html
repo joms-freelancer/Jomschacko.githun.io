@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joms Portfolio | AI Assistant</title>
+    <title>Joms Portfolio | Interactive</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .glass { backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); }
-        #chat-messages::-webkit-scrollbar { width: 4px; }
-        #chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
+        .modal.active { display: flex; }
     </style>
 </head>
 <body class="bg-slate-900 min-h-screen text-white font-sans overflow-x-hidden">
@@ -16,125 +16,72 @@
     <nav class="glass sticky top-0 z-50 p-4">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <h1 class="font-bold text-2xl text-blue-400">JOMS</h1>
-            <div class="flex space-x-2">
-                <button class="px-4 py-1 bg-white/10 rounded-full text-xs" onclick="changeLang('en')">English</button> 
-                <button class="px-4 py-1 bg-white/10 rounded-full text-xs" onclick="changeLang('ml')">മലയാളം</button>
-            </div>
+            <button class="px-4 py-1 bg-white/10 rounded-full text-xs" onclick="location.reload()">Refresh</button>
         </div>
     </nav>
 
     <header class="max-w-4xl mx-auto text-center py-16 px-6">
         <div class="mb-6 flex justify-center">
-            <img id="profile-img" alt="Joms Profile" class="w-44 h-44 rounded-full border-4 border-blue-500 object-cover" 
-                 src="Photo from jomon13051983 copy.jpg" 
-                 onerror="this.src='https://ui-avatars.com/api/?name=Joms&background=0D8ABC&color=fff&size=200'">
+            <img class="w-44 h-44 rounded-full border-4 border-blue-500 object-cover" src="Photo from jomon13051983 copy.jpg" onerror="this.src='https://ui-avatars.com/api/?name=Joms&size=200'">
         </div>
-        <h2 class="text-5xl font-extrabold mb-4" id="hero-title">Welcome</h2>
-        <p class="text-lg text-slate-400 italic" id="hero-desc">Data Entry Expert & AI/ML Enthusiast</p>
+        <h2 class="text-5xl font-extrabold mb-4">Welcome</h2>
+        <p class="text-lg text-slate-400 italic">Data Entry Expert & AI/ML Enthusiast</p>
     </header>
 
     <main class="max-w-6xl mx-auto pb-24 px-6">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
-            <div class="glass p-8 rounded-3xl hover:border-blue-500 transition shadow-lg">
-                <h3 class="font-bold text-blue-400 mb-3" id="col-1-title">About Me</h3>
-                <p class="text-xs text-slate-400" id="col-1-desc">Expert in precision data management.</p>
+            <div onclick="openModal('about-modal')" class="glass p-8 rounded-3xl border-blue-500/20 hover:border-blue-500 cursor-pointer transition transform hover:scale-105 shadow-lg">
+                <h3 class="font-bold text-blue-400 mb-3">About Me</h3>
+                <p class="text-xs text-slate-400">Click to see my journey and experience.</p>
             </div>
-            <div class="glass p-8 rounded-3xl hover:border-green-500 transition shadow-lg">
-                <h3 class="font-bold text-green-400 mb-3" id="col-2-title">Services</h3>
-                <p class="text-xs text-slate-400" id="col-2-desc">Python & Transcription Services.</p>
+            <div class="glass p-8 rounded-3xl opacity-60">
+                <h3 class="font-bold text-green-400 mb-3">Services</h3>
+                <p class="text-xs text-slate-400 italic">Next update...</p>
             </div>
-            <div class="glass p-8 rounded-3xl hover:border-purple-500 transition shadow-lg">
-                <h3 class="font-bold text-purple-400 mb-3" id="col-3-title">Skills</h3>
-                <p class="text-xs text-slate-400" id="col-3-desc">Excel, SQL, and Python Expert.</p>
+            <div class="glass p-8 rounded-3xl opacity-60">
+                <h3 class="font-bold text-purple-400 mb-3">Skills</h3>
+                <p class="text-xs text-slate-400 italic">Next update...</p>
             </div>
-            <div class="glass p-8 rounded-3xl hover:border-red-500 transition shadow-lg">
-                <h3 class="font-bold text-red-400 mb-3" id="col-4-title">Contact</h3>
-                <p class="text-xs text-slate-400" id="col-4-desc">Email: jomonc60@gmail.com</p>
+            <div class="glass p-8 rounded-3xl opacity-60">
+                <h3 class="font-bold text-red-400 mb-3">Contact</h3>
+                <p class="text-xs text-slate-400 italic">Next update...</p>
             </div>
         </div>
     </main>
 
-    <button class="fixed bottom-6 right-6 w-16 h-16 bg-blue-600 rounded-full shadow-2xl z-50 flex items-center justify-center text-2xl hover:scale-110 transition" onclick="toggleChat()">💬</button>
-
-    <div id="chat-window" class="fixed bottom-24 right-6 w-80 h-[480px] glass rounded-2xl shadow-2xl z-50 hidden flex-col overflow-hidden border border-white/20 bg-slate-900/95">
-        <div class="bg-blue-600 p-4 font-bold flex justify-between items-center shadow-lg">
-            <span class="text-sm">Joms AI Assistant</span>
-            <button onclick="toggleChat()">✕</button>
-        </div>
-        
-        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-4 text-sm">
-            <div class="bg-white/10 p-3 rounded-2xl rounded-tl-none mr-10">Hi! I'm Joms's AI. How can I help?</div>
-            
-            <div class="bg-green-600/20 border border-green-500/30 p-3 rounded-xl text-center">
-                <p class="mb-2 text-[10px] text-green-400">Direct Message to Joms:</p>
-                <button onclick="sendToWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 p-2 rounded-lg text-xs font-bold transition">
-                   Chat via WhatsApp
-                </button>
+    <div id="about-modal" class="modal">
+        <div class="glass p-8 rounded-3xl max-w-2xl w-full border border-blue-500/30">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-blue-400">About Jomon</h2>
+                <button onclick="closeModal('about-modal')" class="text-2xl hover:text-red-500">✕</button>
             </div>
-        </div>
-
-        <div class="p-3 bg-white/5 border-t border-white/10 flex gap-2">
-            <input id="chat-input" type="text" class="bg-white/10 outline-none w-full text-sm rounded-xl px-4 py-2" placeholder="Ask something...">
-            <button onclick="sendMessage()" class="bg-blue-600 p-2 rounded-xl">➤</button>
+            <div class="space-y-4 text-sm leading-relaxed text-slate-300">
+                <p>Hello! I am <span class="text-white font-bold">Jomon</span>, a dedicated Data Entry Expert with a passion for emerging technologies. With years of experience in managing complex data sets, I focus on accuracy and efficiency.</p>
+                <div class="bg-white/5 p-4 rounded-xl border border-white/5">
+                    <h4 class="font-bold text-blue-400 mb-2">My Background</h4>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Expertise in Data Mining and Document Management.</li>
+                        <li>Advanced skills in Excel, SQL, and Python.</li>
+                        <li>Deep interest in Machine Learning and AI automation.</li>
+                    </ul>
+                </div>
+                <p>I believe in continuous learning. Currently, I am expanding my skills in Python programming to build smarter data solutions and AI assistants like the one on this site.</p>
+            </div>
         </div>
     </div>
 
+    <button class="fixed bottom-6 right-6 w-16 h-16 bg-blue-600 rounded-full shadow-2xl flex items-center justify-center text-2xl z-50" onclick="alert('AI is updating with new content! Use the boxes for now.')">💬</button>
+
     <script>
-        const API_KEY = "AIzaSyC0BrAbFI_x81iaYl_zzGgj5z1wqbkg4OM"; 
-        const MY_PHONE = "917907311445";
-
-        function toggleChat() { document.getElementById('chat-window').classList.toggle('hidden'); }
-
-        function sendToWhatsApp() {
-            const msg = encodeURIComponent("Hello Joms, I visited your website and would like to talk.");
-            window.open(`https://wa.me/${MY_PHONE}?text=${msg}`, '_blank');
-        }
-
-        async function sendMessage() {
-            const input = document.getElementById('chat-input');
-            const messages = document.getElementById('chat-messages');
-            const userText = input.value.trim();
-            if (!userText) return;
-
-            messages.innerHTML += `<div class="flex justify-end"><div class="bg-blue-600 p-2 rounded-lg max-w-[80%]">${userText}</div></div>`;
-            input.value = "";
-            messages.scrollTop = messages.scrollHeight;
-
-            const loadingId = "load-" + Date.now();
-            messages.innerHTML += `<div id="${loadingId}" class="text-[10px] italic text-slate-500">AI is thinking...</div>`;
-
-            try {
-                // v1beta-യിൽ gemini-1.5-flash ആണ് ഏറ്റവും നല്ല മോഡൽ
-                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: userText }] }] })
-                });
-                const data = await res.json();
-                const loader = document.getElementById(loadingId);
-                if(loader) loader.remove();
-                
-                if (data.candidates && data.candidates[0].content) {
-                    const aiText = data.candidates[0].content.parts[0].text;
-                    messages.innerHTML += `<div class="flex justify-start"><div class="bg-white/10 p-2 rounded-lg border border-white/5 max-w-[80%]">${aiText}</div></div>`;
-                } else {
-                    messages.innerHTML += `<div class="text-amber-400 text-[10px] italic p-2 bg-amber-900/10 rounded">AI is warming up. Please try again in 1 minute or use the WhatsApp button!</div>`;
-                }
-            } catch (e) {
-                if(document.getElementById(loadingId)) document.getElementById(loadingId).innerText = "Connection error!";
+        function openModal(id) { document.getElementById(id).classList.add('active'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+        
+        // Modal പുറത്ത് ക്ലിക്ക് ചെയ്താൽ ക്ലോസ് ആകാൻ
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
             }
-            messages.scrollTop = messages.scrollHeight;
         }
-
-        const content = {
-            'en': { 'hero-title': 'Welcome', 'hero-desc': 'Data Entry Expert & AI/ML Enthusiast' },
-            'ml': { 'hero-title': 'സ്വാഗതം', 'hero-desc': 'ഡാറ്റാ എൻട്രി വിദഗ്ധനും AI/ML പഠിതാവുമാണ്' }
-        };
-        function changeLang(l) {
-            document.getElementById('hero-title').innerText = content[l]['hero-title'];
-            document.getElementById('hero-desc').innerText = content[l]['hero-desc'];
-        }
-        document.getElementById('chat-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') sendMessage(); });
     </script>
 </body>
 </html>
