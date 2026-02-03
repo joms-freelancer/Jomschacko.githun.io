@@ -3,106 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joms Portfolio | Pro</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Joms Portfolio</title>
     <style>
-        .glass { backdrop-filter: blur(16px); background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
-        .modal.active { display: flex; }
-        body { background-color: #0f172a; color: white; }
+        /* അടിസ്ഥാന ക്രമീകരണങ്ങൾ */
+        body {
+            background-color: #0f172a;
+            color: white;
+            font-family: sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: screen;
+        }
+
+        /* ഗ്ലാസ് ഇഫക്ട് */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+        }
+
+        /* ഹെഡർ */
+        header { text-align: center; padding: 50px 20px; }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #3b82f6;
+            object-cover: cover;
+        }
+
+        /* ഗ്രിഡ് ലേഔട്ട് */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 90%;
+            max-width: 1000px;
+            padding-bottom: 50px;
+        }
+
+        .box {
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .box:hover { transform: translateY(-10px); border-color: #3b82f6; }
+
+        /* മോഡൽ (Popup) */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .modal-content {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* ബട്ടണുകൾ */
+        .btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .whatsapp-btn { background: #22c55e; width: 100%; margin-top: 15px; }
+
     </style>
 </head>
-<body class="min-h-screen font-sans selection:bg-blue-500">
-    
-    <nav class="glass sticky top-0 z-50 p-4 mb-8">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <h1 class="font-bold text-2xl text-blue-400">JOMS</h1>
-            <div class="flex gap-2">
-                <button class="px-3 py-1 bg-white/10 rounded-full text-[10px]" onclick="changeLang('en')">EN</button>
-                <button class="px-3 py-1 bg-white/10 rounded-full text-[10px]" onclick="changeLang('ml')">ML</button>
-            </div>
-        </div>
-    </nav>
+<body>
 
-    <header class="max-w-4xl mx-auto text-center py-10 px-6">
-        <div class="mb-6 flex justify-center">
-            <img class="w-40 h-40 rounded-full border-4 border-blue-500 object-cover shadow-2xl" 
-                 src="Photo from jomon13051983 copy.jpg" 
-                 onerror="this.src='https://ui-avatars.com/api/?name=Joms&background=0D8ABC&color=fff&size=200'">
-        </div>
-        <h2 class="text-5xl font-extrabold mb-4 tracking-tight" id="hero-title">Welcome</h2>
-        <p class="text-lg text-slate-400 italic" id="hero-desc">Data Entry Expert & AI/ML Enthusiast</p>
+    <header>
+        <img class="profile-img" src="Photo from jomon13051983 copy.jpg" onerror="this.src='https://ui-avatars.com/api/?name=Joms'">
+        <h1>Welcome</h1>
+        <p style="color: #94a3b8;">Data Entry Expert & AI/ML Enthusiast</p>
     </header>
 
-    <main class="max-w-6xl mx-auto pb-24 px-6">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
-            
-            <div onclick="openModal('about-modal')" class="glass p-8 rounded-3xl border-blue-500/20 hover:border-blue-500 cursor-pointer transition transform hover:-translate-y-2">
-                <h3 class="font-bold text-blue-400 mb-3">About Me</h3>
-                <p class="text-xs text-slate-400">Experience & Journey</p>
-            </div>
-
-            <div onclick="openModal('services-modal')" class="glass p-8 rounded-3xl border-green-500/20 hover:border-green-500 cursor-pointer transition transform hover:-translate-y-2">
-                <h3 class="font-bold text-green-400 mb-3">Services</h3>
-                <p class="text-xs text-slate-400">Works & Project Demos</p>
-            </div>
-
-            <div onclick="alert('Skills section coming in next update!')" class="glass p-8 rounded-3xl border-purple-500/20 hover:border-purple-500 cursor-pointer transition transform hover:-translate-y-2">
-                <h3 class="font-bold text-purple-400 mb-3">Skills</h3>
-                <p class="text-xs text-slate-400">Tools & Technologies</p>
-            </div>
-
-            <div onclick="sendToWhatsApp()" class="glass p-8 rounded-3xl border-emerald-500/20 hover:border-emerald-500 cursor-pointer transition transform hover:-translate-y-2">
-                <h3 class="font-bold text-emerald-400 mb-3">WhatsApp</h3>
-                <p class="text-xs text-slate-400">Direct Message</p>
-            </div>
-
+    <div class="container">
+        <div class="glass box" onclick="openModal('about-modal')">
+            <h3 style="color: #60a5fa;">About Me</h3>
+            <p style="font-size: 12px; color: #94a3b8;">Experience & Journey</p>
         </div>
-    </main>
 
-    <div id="about-modal" class="modal" onclick="closeModal('about-modal')">
-        <div class="glass p-8 rounded-3xl max-w-2xl w-full mx-4" onclick="event.stopPropagation()">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-blue-400">About Me</h2>
-                <button onclick="closeModal('about-modal')" class="text-xl">✕</button>
-            </div>
-            <div class="space-y-4 text-slate-300 text-sm">
-                <p>I am Jomon, a professional specializing in accurate data management and emerging AI technologies.</p>
-                <ul class="list-disc list-inside space-y-2 text-blue-200">
-                    <li>Years of experience in Data Entry.</li>
-                    <li>Currently focusing on AI automation using Python.</li>
-                    <li>Udemy Certified Web Developer.</li>
-                </ul>
-            </div>
+        <div class="glass box" onclick="openModal('services-modal')">
+            <h3 style="color: #4ade80;">Services</h3>
+            <p style="font-size: 12px; color: #94a3b8;">Works & Demos</p>
+        </div>
+
+        <div class="glass box" onclick="alert('Coming Soon!')">
+            <h3 style="color: #c084fc;">Skills</h3>
+            <p style="font-size: 12px; color: #94a3b8;">Tools Used</p>
+        </div>
+
+        <div class="glass box" onclick="window.open('https://wa.me/917907311445')">
+            <h3 style="color: #fb7185;">WhatsApp</h3>
+            <p style="font-size: 12px; color: #94a3b8;">Direct Chat</p>
         </div>
     </div>
 
-    <div id="services-modal" class="modal" onclick="closeModal('services-modal')">
-        <div class="glass p-8 rounded-3xl max-w-2xl w-full mx-4" onclick="event.stopPropagation()">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-green-400">Services & Demos</h2>
-                <button onclick="closeModal('services-modal')" class="text-xl">✕</button>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-                    <h4 class="font-bold text-blue-300 mb-2">Data Services</h4>
-                    <p class="text-xs text-slate-400">Advanced Excel, Data Mining, and Document Automation.</p>
-                </div>
-                <div class="bg-white/5 p-4 rounded-xl border border-green-500/20">
-                    <h4 class="font-bold text-orange-400 mb-2">Web Front-end Demos</h4>
-                    <ul class="text-[11px] space-y-2">
-                        <li class="flex justify-between">Project 1: Portfolio <a href="#" class="text-blue-400 underline">Demo</a></li>
-                        <li class="flex justify-between">Project 2: Business <a href="#" class="text-blue-400 underline">Demo</a></li>
-                    </ul>
-                </div>
-            </div>
+    <div id="about-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('about-modal')">×</span>
+            <h2 style="color: #60a5fa;">About Me</h2>
+            <p>I am Jomon, specializing in data management and AI automation. Certified Web Developer from Udemy.</p>
         </div>
     </div>
 
-    <button class="fixed bottom-6 right-6 w-14 h-14 bg-blue-600 rounded-full shadow-2xl flex items-center justify-center z-50" onclick="alert('AI Assistant is being updated!')">💬</button>
+    <div id="services-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('services-modal')">×</span>
+            <h2 style="color: #4ade80;">My Services</h2>
+            <p>• Data Entry & Excel Automation</p>
+            <p>• Python Scripting</p>
+            <div style="border-top: 1px solid #334155; padding-top: 10px; margin-top: 10px;">
+                <h4 style="color: #fb923c;">Web Demos (Udemy)</h4>
+                <p>Project 1: <a href="#" style="color: #60a5fa;">View Demo</a></p>
+            </div>
+            <button class="btn whatsapp-btn" onclick="window.open('https://wa.me/917907311445')">Message on WhatsApp</button>
+        </div>
+    </div>
 
     <script>
-        function openModal(id) { document.getElementById(id).classList.add('active'); }
-        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
         
-        function sendToWhatsApp() {
+        // Modal-ന് പുറത്ത് ക്ലിക്ക് ചെയ്താൽ ക്ലോസ് ആകാൻ
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
