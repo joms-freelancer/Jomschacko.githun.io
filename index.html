@@ -51,8 +51,95 @@
 			</div>
 		</div>
 	</main>
-	<script src="script.js">
-	</script> <button class="fixed bottom-6 right-6 w-14 h-14 bg-blue-600 text-white rounded-full shadow-2xl flex items-center justify-center z-50 hover:scale-110 transition" onclick="toggleChat()"><svg class="h-6 w-6" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+	<script>
+    const content = {
+        'en': {
+            'hero-title': 'Hi, I am Joms',
+            'hero-desc': 'Data Entry Expert & AI/ML Enthusiast',
+            'col-1-title': 'About Me',
+            'col-1-desc': 'A dedicated freelancer specialized in precision data management and exploring the world of Artificial Intelligence.',
+            'col-2-title': 'Services',
+            'col-2-desc': 'Offering professional Data Entry, Web Research, Python scripting, and basic Machine Learning models.',
+            'col-3-title': 'Skills',
+            'col-3-desc': 'Expertise in Microsoft Excel, Python, SQL, Data Cleaning, and Predictive Analytics.',
+            'col-4-title': 'Contact',
+            'col-4-desc': 'Available for freelance projects. Email: jomschacko@gmail.com'
+        },
+        'ml': {
+            'hero-title': 'ഹലോ, ഞാൻ ജോംസ്',
+            'hero-desc': 'ഡാറ്റാ എൻട്രി വിദഗ്ധനും AI/ML പഠിതാവുമാണ്',
+            'col-1-title': 'എന്നെക്കുറിച്ച്',
+            'col-1-desc': 'കൃത്യതയാർന്ന ഡാറ്റാ മാനേജ്‌മെന്റിലും ആർട്ടിഫിഷ്യൽ ഇന്റലിജൻസിലും താല്പര്യമുള്ള ഒരു ഫ്രീലാൻസറാണ് ഞാൻ.',
+            'col-2-title': 'സേവനങ്ങൾ',
+            'col-2-desc': 'ഡാറ്റാ എൻട്രി, വെബ് റിസർച്ച്, പൈത്തൺ ഓട്ടോമേഷൻ, മെഷീൻ ലേണിംഗ് എന്നിവ ചെയ്തു നൽകുന്നു.',
+            'col-3-title': 'കഴിവുകൾ',
+            'col-3-desc': 'പൈത്തൺ, എക്സൽ, ഡാറ്റാ അനാലിസിസ്, മെഷീൻ ലേണിംഗ് എന്നിവയിൽ പ്രാവീണ്യമുണ്ട്.',
+            'col-4-title': 'ബന്ധപ്പെടുക',
+            'col-4-desc': 'പ്രോജക്റ്റുകൾക്കായി എന്നെ ബന്ധപ്പെടാം. ഇമെയിൽ: jomschacko@gmail.com'
+        }
+    };
+
+    window.changeLang = function(lang) {
+        const langData = content[lang];
+        if (langData) {
+            for (let id in langData) {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.classList.add('fade-in');
+                    element.innerText = langData[id];
+                    setTimeout(() => element.classList.remove('fade-in'), 500);
+                }
+            }
+        }
+        localStorage.setItem('preferredLang', lang);
+    };
+
+    window.toggleChat = function() {
+        const chat = document.getElementById('chat-window');
+        chat.classList.toggle('hidden');
+    };
+
+    window.sendMessage = function() {
+        const input = document.getElementById('chat-input');
+        const messages = document.getElementById('chat-messages');
+        
+        if (!input || !messages || input.value.trim() === "") return;
+
+        const userText = input.value.trim();
+        messages.innerHTML += `<div class="bg-blue-500/30 p-2 rounded-lg text-right ml-10 mb-2">${userText}</div>`;
+        
+        const lowerText = userText.toLowerCase();
+        input.value = "";
+
+        setTimeout(() => {
+            let reply = "I'm still learning! Contact Joms at jomschacko@gmail.com";
+
+            if (lowerText.includes("hello") || lowerText.includes("hi") || lowerText.includes("ഹലോ")) {
+                reply = "Hi! How can I help you? / നമസ്കാരം, എനിക്ക് എങ്ങനെ സഹായിക്കാനാകും?";
+            } else if (lowerText.includes("service") || lowerText.includes("work") || lowerText.includes("സേവനം")) {
+                reply = "Joms provides Data Entry, Python, and ML services.";
+            } else if (lowerText.includes("skill") || lowerText.includes("കഴിവുകൾ")) {
+                reply = "Joms is an expert in Python, Excel, and SQL.";
+            }
+
+            messages.innerHTML += `<div class="bg-white/10 p-2 rounded-lg mr-10 mb-2 border border-white/5">${reply}</div>`;
+            messages.scrollTop = messages.scrollHeight;
+        }, 600);
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedLang = localStorage.getItem('preferredLang') || 'en';
+        window.changeLang(savedLang);
+
+        // Enter കീ പ്രസ് ചെയ്താൽ മെസ്സേജ് പോകാൻ
+        document.getElementById('chat-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                window.sendMessage();
+            }
+        });
+    });
+</script>
+	 <button class="fixed bottom-6 right-6 w-14 h-14 bg-blue-600 text-white rounded-full shadow-2xl flex items-center justify-center z-50 hover:scale-110 transition" onclick="toggleChat()"><svg class="h-6 w-6" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 	<path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
 	<div class="fixed bottom-24 right-6 w-80 h-96 backdrop-blur-xl bg-white/20 border border-white/30 rounded-3xl shadow-2xl z-50 hidden flex-col overflow-hidden" id="chat-window">
 		<div class="bg-blue-600/50 p-4 text-white font-bold flex justify-between">
