@@ -1,3 +1,4 @@
+
 const content = {
 	'en': {
 		'hero-title': 'Hi, I am Joms',
@@ -74,21 +75,44 @@ function toggleChat() {
 	chat.classList.toggle('hidden');
 }
 
-function sendMessage() {
-	const input = document.getElementById('chat-input');
-	const messages = document.getElementById('chat-messages');
-	if (input.value.trim() === "") return;
-	// User Message
-	messages.innerHTML += `<div class="bg-blue-500/30 p-2 rounded-lg text-right ml-10">${input.value}</div>`;
-	const userText = input.value.toLowerCase();
-	input.value = "";
-	// Simple AI Logic
-	setTimeout(() => {
-		let reply = "I'm still learning! Contact Joms for more info.";
-		if (userText.includes("hello") || userText.includes("hi")) reply = "Hi there! How can I assist you?";
-		else if (userText.includes("services")) reply = "Joms offers Data Entry, Web Research, and AI solutions.";
-		else if (userText.includes("skills")) reply = "He is expert in Python, SQL, and Machine Learning.";
-		messages.innerHTML += `<div class="bg-white/10 p-2 rounded-lg mr-10">${reply}</div>`;
-		messages.scrollTop = messages.scrollHeight;
-	}, 1000);
-}
+window.sendMessage = function() {
+    const input = document.getElementById('chat-input');
+    const messages = document.getElementById('chat-messages');
+    
+    if (!input || !messages || input.value.trim() === "") return;
+
+    // യൂസർ അയക്കുന്ന മെസേജ് സ്ക്രീനിൽ കാണിക്കുന്നു
+    const userText = input.value.trim();
+    messages.innerHTML += `<div class="bg-blue-500/30 p-2 rounded-lg text-right ml-10 mb-2">${userText}</div>`;
+    
+    const lowerText = userText.toLowerCase();
+    input.value = "";
+
+    // ബോട്ടിന്റെ മറുപടി ലോജിക്
+    setTimeout(() => {
+        let reply = "I'm still learning! Contact Joms for more info.";
+        
+        // സ്മാർട്ട് റിപ്ലൈകൾ
+        if (lowerText.includes("hello") || lowerText.includes("hi") || lowerText.includes("ഹലോ")) {
+            reply = "Hi there! How can I assist you today? / നമസ്കാരം, എനിക്ക് എങ്ങനെ സഹായിക്കാനാകും?";
+        } 
+        else if (lowerText.includes("services") || lowerText.includes("സേവനങ്ങൾ") || lowerText.includes("work")) {
+            reply = "Joms offers: Data Entry, Web Research, and AI/ML solutions.";
+        } 
+        else if (lowerText.includes("skills") || lowerText.includes("കഴിവുകൾ")) {
+            reply = "He is expert in Python, Excel, SQL, and Machine Learning.";
+        } 
+        else if (lowerText.includes("contact") || lowerText.includes("ബന്ധപ്പെടാൻ")) {
+            reply = "You can contact Joms via email or through the social links below.";
+        }
+        else if (lowerText.includes("bye") || lowerText.includes("നന്ദി")) {
+            reply = "You're welcome! Have a great day! / നന്ദി, ശുഭദിനം നേരുന്നു!";
+        }
+
+        // ബോട്ടിന്റെ മറുപടി സ്ക്രീനിൽ കാണിക്കുന്നു
+        messages.innerHTML += `<div class="bg-white/10 p-2 rounded-lg mr-10 mb-2 border border-white/5">${reply}</div>`;
+        
+        // മെസേജ് കൂടുമ്പോൾ ഓട്ടോമാറ്റിക്കായി താഴേക്ക് സ്ക്രോൾ ചെയ്യാൻ
+        messages.scrollTop = messages.scrollHeight;
+    }, 600);
+};
