@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joms Portfolio | Home</title>
+    <title>Joms Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .glass { backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); }
         #chat-messages::-webkit-scrollbar { width: 4px; }
         #chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
-        #chat-window { display: none; flex-direction: column; transition: all 0.3s ease; }
+        #chat-window { display: none; flex-direction: column; }
     </style>
+    <script>
+        function toggleChat() { 
+            const win = document.getElementById('chat-window');
+            win.style.display = (win.style.display === "none" || win.style.display === "") ? "flex" : "none";
+        }
+    </script>
 </head>
 <body class="bg-slate-900 min-h-screen text-white font-sans selection:bg-blue-500 overflow-x-hidden">
-
+    
     <nav class="glass sticky top-0 z-50 p-4">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <h1 class="font-bold text-2xl text-blue-400 tracking-tighter">JOMS</h1>
@@ -36,108 +42,118 @@
 
     <main class="max-w-6xl mx-auto pb-24 px-6">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
+            
             <a href="about.html" class="block group">
-                <div class="glass p-8 rounded-3xl group-hover:border-blue-500 transition-all duration-300 shadow-lg h-full">
-                    <h3 class="font-bold text-blue-400 mb-3">About Me</h3>
-                    <p class="text-xs text-slate-400">Experience & Journey</p>
+                <div class="glass p-8 rounded-3xl group-hover:border-blue-500 transition shadow-lg h-full">
+                    <h3 class="font-bold text-blue-400 mb-3" id="box-about-title">About Me</h3>
+                    <p class="text-xs text-slate-400" id="box-about-desc">Experience & Journey</p>
                 </div>
             </a>
+
             <a href="services.html" class="block group">
-                <div class="glass p-8 rounded-3xl group-hover:border-green-500 transition-all duration-300 shadow-lg h-full">
-                    <h3 class="font-bold text-green-400 mb-3">Services</h3>
-                    <p class="text-xs text-slate-400">50+ Web Applications</p>
+                <div class="glass p-8 rounded-3xl group-hover:border-green-500 transition shadow-lg h-full">
+                    <h3 class="font-bold text-green-400 mb-3" id="box-service-title">Services</h3>
+                    <p class="text-xs text-slate-400" id="box-service-desc">Top 10 Project Demos</p>
                 </div>
             </a>
+
             <div class="glass p-8 rounded-3xl hover:border-purple-500 transition shadow-lg h-full cursor-default">
-                <h3 class="font-bold text-purple-400 mb-3">Skills</h3>
-                <p class="text-xs text-slate-400">Python, AI & Web Tools</p>
+                <h3 class="font-bold text-purple-400 mb-3" id="box-skill-title">Skills</h3>
+                <p class="text-xs text-slate-400" id="box-skill-desc">Expert Python & AI Architect</p>
             </div>
-            <a href="projects/magic-boxes.html" class="block group">
-                <div class="glass p-8 rounded-3xl group-hover:border-emerald-500 transition-all duration-300 shadow-lg h-full">
-                    <h3 class="font-bold text-emerald-400 mb-3">Magic Box</h3>
-                    <p class="text-xs text-slate-400">CSS 3D Animation Demo</p>
-                </div>
-            </a>
+
+            <div class="glass p-8 rounded-3xl border-emerald-500/30 transition shadow-lg h-full">
+                <h3 class="font-bold text-emerald-400 mb-3" id="box-contact-title">Contact Me</h3>
+                <p class="text-xs text-slate-400" id="box-contact-desc">Email: jomon13051983@gmail.com</p>
+            </div>
+
         </div>
     </main>
 
-    <button class="fixed bottom-6 right-6 w-16 h-16 bg-blue-600 text-white rounded-full shadow-2xl z-50 flex items-center justify-center text-2xl hover:scale-110 active:scale-95 transition" onclick="toggleChat()">💬</button>
+    <button class="fixed bottom-6 right-6 w-16 h-16 bg-blue-600 text-white rounded-full shadow-2xl z-50 flex items-center justify-center text-2xl" onclick="toggleChat()">💬</button>
 
     <div id="chat-window" class="fixed bottom-24 right-6 w-80 h-[450px] glass rounded-2xl shadow-2xl z-50 border border-white/20 bg-slate-900/95 overflow-hidden">
-        <div class="bg-blue-600 p-4 font-bold flex justify-between items-center shadow-md">
+        <div class="bg-blue-600 p-4 font-bold flex justify-between items-center">
             <span class="text-sm">Joms Smart Bot</span>
-            <button onclick="toggleChat()" class="hover:text-red-400 text-xl font-bold">✕</button>
+            <button onclick="toggleChat()" class="text-xl">✕</button>
         </div>
         <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-4 text-sm bg-transparent">
             <div class="bg-white/10 p-3 rounded-2xl rounded-tl-none mr-10 border border-white/5 text-blue-100">
-                Hi! I'm Joms's Assistant. You can ask me about his services, skills, or projects.
+                Hi! I can help you with Joms's services or contact info.
             </div>
         </div>
         <div class="p-3 bg-white/5 border-t border-white/10 flex gap-2">
-            <input id="chat-input" type="text" class="bg-white/10 border-none outline-none w-full text-sm rounded-xl px-4 py-2 text-white" placeholder="Ask something (e.g. services, contact)...">
-            <button onclick="sendLocalMessage()" class="bg-blue-600 p-2 rounded-xl hover:bg-blue-500 transition shadow-lg">➤</button>
+            <input id="chat-input" type="text" class="bg-white/10 border-none outline-none w-full text-sm rounded-xl px-4 py-2 text-white" placeholder="Ask something...">
+            <button onclick="sendLocalMessage()" class="bg-blue-600 p-2 rounded-xl">➤</button>
         </div>
     </div>
 
     <script>
-        // ചോദ്യങ്ങളും ഉത്തരങ്ങളും ഇവിടെ ചേർക്കാം
         const qaDatabase = [
-            { keywords: ["services", "work", "ചെയ്തുതരും"], response: "Joms specializes in Data Solutions, Python Automation, and Web Development. He has 50+ project demos ready!" },
-            { keywords: ["contact", "phone", "whatsapp", "വിളിക്കാൻ"], response: "You can contact Joms via WhatsApp at +91 7907311445 or through the contact section on this site." },
-            { keywords: ["skills", "python", "ai", "അറിയാം"], response: "He is proficient in Python, AI/ML models, Tailwind CSS, and Cloud Data Solutions." },
-            { keywords: ["experience", "years", "പഴക്കം"], response: "Joms has extensive experience in handling complex data systems and building automated web applications." },
-            { keywords: ["hi", "hello", "hey", "ഹലോ"], response: "Hello! How can I assist you with Joms's portfolio today?" },
-            { keywords: ["project", "magic box", "demo"], response: "You can check out the 'Magic Box' 3D animation project in the grid above!" }
+            { keywords: ["services", "work", "ചെയ്തുതരും", "സേവനം"], response: "ഞാൻ ഡാറ്റാ സൊല്യൂഷൻസ്, പൈത്തൺ ഓട്ടോമേഷൻ, വെബ് ഡെവലപ്‌മെന്റ് എന്നിവയിൽ വിദഗ്ധനാണ്. 10 മികച്ച പ്രോജക്റ്റുകൾ എന്റെ പക്കൽ ലഭ്യമാണ്." },
+            { keywords: ["contact", "phone", "email", "വിളിക്കാൻ", "ബന്ധപ്പെടാൻ", "ഇമെയിൽ"], response: "നിങ്ങൾക്ക് എന്നെ jomon13051983@gmail.com എന്ന ഇമെയിൽ വിലാസം വഴി ബന്ധപ്പെടാം." },
+            { keywords: ["time", "duration", "ദിവസം", "സമയം"], response: "ചെറിയ പ്രോജക്റ്റുകൾ 2-3 ദിവസത്തിനുള്ളിലും, വലിയവ 1-2 ആഴ്ചയ്ക്കുള്ളിലും ഞാൻ പൂർത്തിയാക്കി നൽകും." },
+            { keywords: ["skills", "python", "ai", "ഭാഷ", "അറിയാം"], response: "പൈത്തൺ, AI/ML, ക്ലൗഡ് കമ്പ്യൂട്ടിംഗ്, ടൈൽവിൻഡ് സിഎസ്എസ് എന്നിവയിലാണ് എന്റെ പ്രധാന കഴിവുകൾ. പൈത്തണിൽ ഞാൻ ഒരു എക്സ്പെർട്ട് ആണ്." },
+            { keywords: ["hi", "hello", "hey", "ഹലോ", "നമസ്കാരം"], response: "ഹലോ! ജോംസിന്റെ അസിസ്റ്റന്റാണ് ഞാൻ. നിങ്ങൾക്ക് എന്ത് സഹായമാണ് വേണ്ടത്?" }
         ];
-
-        function toggleChat() { 
-            const win = document.getElementById('chat-window');
-            win.style.display = (win.style.display === "none" || win.style.display === "") ? "flex" : "none";
-        }
 
         function sendLocalMessage() {
             const input = document.getElementById('chat-input');
             const messages = document.getElementById('chat-messages');
             const userText = input.value.toLowerCase().trim();
-            
             if (!userText) return;
 
-            // User Message
-            messages.innerHTML += `<div class="flex justify-end"><div class="bg-blue-600 p-2 rounded-lg max-w-[85%] mb-2 shadow-sm">${input.value}</div></div>`;
+            messages.innerHTML += `<div class="flex justify-end mb-2"><div class="bg-blue-600 p-2 rounded-lg max-w-[85%]">${input.value}</div></div>`;
             input.value = "";
 
-            // Bot Response കണ്ടെത്തുന്നു
-            let botReply = "I'm sorry, I don't have information on that. Please try asking about 'services', 'skills', or 'contact'.";
-            
+            let botReply = "I'm sorry, I don't know about that. Try asking about 'services' or 'contact'.";
             for (let item of qaDatabase) {
                 if (item.keywords.some(key => userText.includes(key))) {
                     botReply = item.response;
                     break;
                 }
             }
-
-            // മറുപടി നൽകാൻ ചെറിയൊരു ഡിലേ (Real feel കിട്ടാൻ)
             setTimeout(() => {
-                messages.innerHTML += `<div class="flex justify-start"><div class="bg-white/10 p-3 rounded-2xl rounded-tl-none mr-8 border border-white/5 mb-2">${botReply}</div></div>`;
+                messages.innerHTML += `<div class="flex justify-start mb-2"><div class="bg-white/10 p-3 rounded-2xl rounded-tl-none mr-8 border border-white/5">${botReply}</div></div>`;
                 messages.scrollTop = messages.scrollHeight;
             }, 500);
-            
-            messages.scrollTop = messages.scrollHeight;
         }
 
-        // Language toggle logic
-        function changeLang(l) {
-            const t = { 
-                'en': ['Welcome', 'Data Solutions Specialist & AI/ML Enthusiast'], 
-                'ml': ['സ്വാഗതം', 'ഡാറ്റാ വിദഗ്ധനും AI പഠിതാവുമാണ്'] 
-            };
-            document.getElementById('hero-title').innerText = t[l][0];
-            document.getElementById('hero-desc').innerText = t[l][1];
+        const translations = {
+            'en': {
+                'hero-title': 'Welcome',
+                'hero-desc': 'Data Solutions Specialist & AI/ML Enthusiast',
+                'box-about-title': 'About Me',
+                'box-about-desc': 'Experience & Journey',
+                'box-service-title': 'Services',
+                'box-service-desc': 'Top 10 Project Demos',
+                'box-skill-title': 'Skills',
+                'box-skill-desc': 'Expert Python & AI Architect',
+                'box-contact-title': 'Contact Me',
+                'box-contact-desc': 'Email: jomon13051983@gmail.com'
+            },
+            'ml': {
+                'hero-title': 'സ്വാഗതം',
+                'hero-desc': 'ഡാറ്റാ വിദഗ്ധനും AI പഠിതാവുമാണ്',
+                'box-about-title': 'എന്നെക്കുറിച്ച്',
+                'box-about-desc': 'അനുഭവസമ്പത്തും യാത്രയും',
+                'box-service-title': 'സേവനങ്ങൾ',
+                'box-service-desc': 'മികച്ച 10 പ്രോജക്റ്റുകൾ',
+                'box-skill-title': 'കഴിവുകൾ',
+                'box-skill-desc': 'അഡ്വാൻസ്ഡ് പൈത്തൺ & AI വിദഗ്ധൻ',
+                'box-contact-title': 'ബന്ധപ്പെടുക',
+                'box-contact-desc': 'ഇമെയിൽ: jomon13051983@gmail.com'
+            }
+        };
+
+        function changeLang(lang) {
+            const t = translations[lang];
+            for (let key in t) {
+                document.getElementById(key).innerText = t[key];
+            }
         }
 
-        document.getElementById('chat-input').addEventListener('keypress', (e) => { 
-            if(e.key === 'Enter') sendLocalMessage(); 
-        });
+        document.getElementById('chat-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') sendLocalMessage(); });
     </script>
 </body>
 </html>
