@@ -37,111 +37,96 @@
     <main class="max-w-6xl mx-auto pb-24 px-6">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
             <a href="about.html" class="block group">
-                <div class="glass p-8 rounded-3xl group-hover:border-blue-500 transition-all duration-300 shadow-lg h-full">
+                <div class="glass p-8 rounded-3xl group-hover:border-blue-500 transition shadow-lg h-full">
                     <h3 class="font-bold text-blue-400 mb-3">About Me</h3>
-                    <p class="text-xs text-slate-400">Experience & Projects</p>
+                    <p class="text-xs text-slate-400">Experience & Journey</p>
                 </div>
             </a>
             <a href="services.html" class="block group">
-                <div class="glass p-8 rounded-3xl group-hover:border-green-500 transition-all duration-300 shadow-lg h-full">
+                <div class="glass p-8 rounded-3xl group-hover:border-green-500 transition shadow-lg h-full">
                     <h3 class="font-bold text-green-400 mb-3">Services</h3>
-                    <p class="text-xs text-slate-400">50+ Web Applications</p>
+                    <p class="text-xs text-slate-400">50+ Projects</p>
                 </div>
             </a>
-            <div class="glass p-8 rounded-3xl hover:border-purple-500 transition shadow-lg h-full cursor-default">
+            <div class="glass p-8 rounded-3xl hover:border-purple-500 transition shadow-lg h-full">
                 <h3 class="font-bold text-purple-400 mb-3">Skills</h3>
-                <p class="text-xs text-slate-400">Python, AI & Web Tools</p>
+                <p class="text-xs text-slate-400">AI & Web Tools</p>
             </div>
             <a href="projects/magic-boxes.html" class="block group">
-                <div class="glass p-8 rounded-3xl group-hover:border-emerald-500 transition-all duration-300 shadow-lg h-full">
+                <div class="glass p-8 rounded-3xl group-hover:border-emerald-500 transition shadow-lg h-full">
                     <h3 class="font-bold text-emerald-400 mb-3">Magic Box</h3>
-                    <p class="text-xs text-slate-400">CSS 3D Animation Demo</p>
+                    <p class="text-xs text-slate-400">CSS Demo</p>
                 </div>
             </a>
         </div>
     </main>
 
-    <button class="fixed bottom-6 right-6 w-16 h-16 bg-blue-600 text-white rounded-full shadow-2xl z-50 flex items-center justify-center text-2xl hover:scale-110 active:scale-95 transition" onclick="toggleChat()">💬</button>
+    <button class="fixed bottom-6 right-6 w-16 h-16 bg-blue-600 text-white rounded-full shadow-2xl z-50 flex items-center justify-center text-2xl" onclick="toggleChat()">💬</button>
 
     <div id="chat-window" class="fixed bottom-24 right-6 w-80 h-[450px] glass rounded-2xl shadow-2xl z-50 border border-white/20 bg-slate-900/95 overflow-hidden">
-        <div class="bg-blue-600 p-4 font-bold flex justify-between items-center shadow-md">
+        <div class="bg-blue-600 p-4 font-bold flex justify-between items-center">
             <span class="text-sm">Joms AI Bot</span>
-            <button onclick="toggleChat()" class="hover:text-red-400 text-xl font-bold">✕</button>
+            <button onclick="toggleChat()">✕</button>
         </div>
         <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-4 text-sm">
-            <div class="bg-white/10 p-3 rounded-2xl rounded-tl-none mr-10 border border-white/5">
-                Hi! I'm Joms's AI assistant. Ask me anything!
-            </div>
+            <div class="bg-white/10 p-3 rounded-2xl rounded-tl-none mr-10 border border-white/5">Hi! How can I help you?</div>
         </div>
         <div class="p-3 bg-white/5 border-t border-white/10 flex gap-2">
-            <input id="chat-input" type="text" class="bg-white/10 border-none outline-none w-full text-sm rounded-xl px-4 py-2 text-white" placeholder="Type a message...">
-            <button onclick="sendMessage()" class="bg-blue-600 p-2 rounded-xl hover:bg-blue-500 transition shadow-lg">➤</button>
+            <input id="chat-input" type="text" class="bg-white/10 border-none outline-none w-full text-sm rounded-xl px-4 py-2 text-white" placeholder="Ask something...">
+            <button onclick="sendMessage()" class="bg-blue-600 p-2 rounded-xl">➤</button>
         </div>
     </div>
 
     <script>
-        const API_KEY = "AIzaSyDzvyM-z7qgWlP06N7QqhAxIH1HAt1Dwmw"; 
+        const API_KEY = "AIzaSyD7DG4ilxYu23BQ1jvhc_n7w6NSXYFsy58"; 
 
         function toggleChat() { 
             const win = document.getElementById('chat-window');
-            if (win.style.display === "none" || win.style.display === "") {
-                win.style.display = "flex";
-            } else {
-                win.style.display = "none";
-            }
+            win.style.display = (win.style.display === "none" || win.style.display === "") ? "flex" : "none";
         }
 
         async function sendMessage() {
             const input = document.getElementById('chat-input');
             const messages = document.getElementById('chat-messages');
-            const userText = input.value.trim();
-            
-            if (!userText) return;
+            const text = input.value.trim();
+            if (!text) return;
 
-            messages.innerHTML += `<div class="flex justify-end"><div class="bg-blue-600 p-2 rounded-lg max-w-[85%] mb-2 shadow-sm">${userText}</div></div>`;
+            messages.innerHTML += `<div class="flex justify-end mb-2"><div class="bg-blue-600 p-2 rounded-lg max-w-[85%]">${text}</div></div>`;
             input.value = "";
             messages.scrollTop = messages.scrollHeight;
 
             try {
-                // v1beta + gemini-pro (ഏറ്റവും stable ആയ വഴി)
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
+                // v1 + gemini-1.5-flash എന്ന ഏറ്റവും പുതിയ URL
+                const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
                 
                 const response = await fetch(url, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: userText }] }]
-                    })
+                    body: JSON.stringify({ contents: [{ parts: [{ text: text }] }] })
                 });
 
                 const data = await response.json();
                 
                 if (data.candidates && data.candidates[0].content) {
-                    const aiText = data.candidates[0].content.parts[0].text;
-                    messages.innerHTML += `<div class="flex justify-start"><div class="bg-white/10 p-3 rounded-2xl rounded-tl-none mr-8 border border-white/5 mb-2 shadow-sm">${aiText}</div></div>`;
+                    const reply = data.candidates[0].content.parts[0].text;
+                    messages.innerHTML += `<div class="flex justify-start mb-2"><div class="bg-white/10 p-3 rounded-2xl rounded-tl-none border border-white/5 mr-8">${reply}</div></div>`;
                 } else {
-                    const errorMsg = data.error ? data.error.message : "Response Issue";
-                    messages.innerHTML += `<div class="text-amber-400 text-[10px] text-center italic">Error: ${errorMsg}</div>`;
+                    console.error("API Error:", data);
+                    messages.innerHTML += `<div class="text-amber-400 text-[10px] text-center italic">Error: Please ensure API is enabled.</div>`;
                 }
             } catch (e) {
-                messages.innerHTML += `<div class="text-red-400 text-[10px] text-center italic">Network error. Please try again.</div>`;
+                messages.innerHTML += `<div class="text-red-400 text-[10px] text-center italic">Connection Error.</div>`;
             }
             messages.scrollTop = messages.scrollHeight;
         }
 
-        const trans = {
-            'en': { 'hero-title': 'Welcome', 'hero-desc': 'Data Solutions Specialist & AI/ML Enthusiast' },
-            'ml': { 'hero-title': 'സ്വാഗതം', 'hero-desc': 'ഡാറ്റാ വിദഗ്ധനും AI പഠിതാവുമാണ്' }
-        };
-
         function changeLang(l) {
-            document.getElementById('hero-title').innerText = trans[l]['hero-title'];
-            document.getElementById('hero-desc').innerText = trans[l]['hero-desc'];
+            const t = { 'en': ['Welcome', 'Data Solutions Specialist & AI/ML Enthusiast'], 'ml': ['സ്വാഗതം', 'ഡാറ്റാ വിദഗ്ധനും AI പഠിതാവുമാണ്'] };
+            document.getElementById('hero-title').innerText = t[l][0];
+            document.getElementById('hero-desc').innerText = t[l][1];
         }
 
-        document.getElementById('chat-input').addEventListener('keypress', (e) => { 
-            if(e.key === 'Enter') sendMessage(); 
-        });
+        document.getElementById('chat-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') sendMessage(); });
     </script>
 </body>
 </html>
