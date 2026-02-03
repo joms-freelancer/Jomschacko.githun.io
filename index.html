@@ -5,97 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Joms Portfolio</title>
     <style>
-        /* അടിസ്ഥാന ക്രമീകരണങ്ങൾ */
         body {
             background-color: #0f172a;
             color: white;
-            font-family: sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: screen;
         }
 
-        /* ഗ്ലാസ് ഇഫക്ട് */
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-        }
-
-        /* ഹെഡർ */
-        header { text-align: center; padding: 50px 20px; }
+        header { text-align: center; padding: 40px 20px; }
+        
         .profile-img {
-            width: 150px;
-            height: 150px;
+            width: 140px; height: 140px;
             border-radius: 50%;
             border: 4px solid #3b82f6;
-            object-cover: cover;
+            object-fit: cover;
+            margin-bottom: 15px;
         }
 
         /* ഗ്രിഡ് ലേഔട്ട് */
         .container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 20px;
             width: 90%;
-            max-width: 1000px;
-            padding-bottom: 50px;
+            max-width: 900px;
         }
 
         .box {
-            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px;
             text-align: center;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: 0.3s;
         }
 
-        .box:hover { transform: translateY(-10px); border-color: #3b82f6; }
+        .box:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: #3b82f6;
+            transform: translateY(-5px);
+        }
 
-        /* മോഡൽ (Popup) */
-        .modal {
-            display: none;
+        /* പോപ്പ് അപ്പ് സ്റ്റൈൽ */
+        .modal-overlay {
+            display: none; /* തുടക്കത്തിൽ കാണില്ല */
             position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.9);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
             justify-content: center;
             align-items: center;
-            z-index: 100;
         }
 
         .modal-content {
             background: #1e293b;
             padding: 30px;
-            border-radius: 20px;
+            border-radius: 25px;
+            width: 85%;
             max-width: 500px;
-            width: 90%;
+            border: 1px solid #3b82f6;
             position: relative;
         }
 
         .close-btn {
             position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 24px;
+            top: 15px; right: 20px;
+            font-size: 30px;
+            color: #94a3b8;
             cursor: pointer;
         }
 
-        /* ബട്ടണുകൾ */
-        .btn {
-            background: #3b82f6;
+        .btn-wa {
+            display: block;
+            width: 100%;
+            background: #22c55e;
             color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
-            cursor: pointer;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
             font-weight: bold;
-            margin-top: 10px;
+            margin-top: 20px;
         }
 
-        .whatsapp-btn { background: #22c55e; width: 100%; margin-top: 15px; }
-
+        h2 { margin-top: 0; color: #3b82f6; }
+        p { line-height: 1.6; color: #cbd5e1; }
     </style>
 </head>
 <body>
@@ -103,63 +103,61 @@
     <header>
         <img class="profile-img" src="Photo from jomon13051983 copy.jpg" onerror="this.src='https://ui-avatars.com/api/?name=Joms'">
         <h1>Welcome</h1>
-        <p style="color: #94a3b8;">Data Entry Expert & AI/ML Enthusiast</p>
+        <p>Data Entry Expert & AI/ML Enthusiast</p>
     </header>
 
     <div class="container">
-        <div class="glass box" onclick="openModal('about-modal')">
+        <div class="box" onclick="showModal('about')">
             <h3 style="color: #60a5fa;">About Me</h3>
-            <p style="font-size: 12px; color: #94a3b8;">Experience & Journey</p>
+            <p style="font-size: 11px;">Experience & Journey</p>
         </div>
 
-        <div class="glass box" onclick="openModal('services-modal')">
+        <div class="box" onclick="showModal('services')">
             <h3 style="color: #4ade80;">Services</h3>
-            <p style="font-size: 12px; color: #94a3b8;">Works & Demos</p>
+            <p style="font-size: 11px;">Works & Demos</p>
         </div>
 
-        <div class="glass box" onclick="alert('Coming Soon!')">
-            <h3 style="color: #c084fc;">Skills</h3>
-            <p style="font-size: 12px; color: #94a3b8;">Tools Used</p>
-        </div>
-
-        <div class="glass box" onclick="window.open('https://wa.me/917907311445')">
+        <div class="box" onclick="window.open('https://wa.me/917907311445')">
             <h3 style="color: #fb7185;">WhatsApp</h3>
-            <p style="font-size: 12px; color: #94a3b8;">Direct Chat</p>
+            <p style="font-size: 11px;">Direct Chat</p>
         </div>
     </div>
 
-    <div id="about-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('about-modal')">×</span>
-            <h2 style="color: #60a5fa;">About Me</h2>
-            <p>I am Jomon, specializing in data management and AI automation. Certified Web Developer from Udemy.</p>
+    <div id="modal-about" class="modal-overlay" onclick="hideModal('about')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="hideModal('about')">&times;</span>
+            <h2>About Me</h2>
+            <p>I am Jomon, an expert in precision Data Entry and AI solutions. With a strong background in Excel and Python, I help automate complex tasks.</p>
+            <p>Currently, I am building AI-driven web solutions to make data management more efficient.</p>
         </div>
     </div>
 
-    <div id="services-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('services-modal')">×</span>
-            <h2 style="color: #4ade80;">My Services</h2>
-            <p>• Data Entry & Excel Automation</p>
-            <p>• Python Scripting</p>
-            <div style="border-top: 1px solid #334155; padding-top: 10px; margin-top: 10px;">
-                <h4 style="color: #fb923c;">Web Demos (Udemy)</h4>
-                <p>Project 1: <a href="#" style="color: #60a5fa;">View Demo</a></p>
+    <div id="modal-services" class="modal-overlay" onclick="hideModal('services')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="hideModal('services')">&times;</span>
+            <h2>Services</h2>
+            <p>• Advanced Data Entry<br>
+               • Python Automation Scripts<br>
+               • Web Front-end Development</p>
+            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px;">
+                <h4 style="color: #fb923c; margin-top: 0;">My Project Demos</h4>
+                <p style="font-size: 13px;">Coming Soon: My Udemy Course Projects will be listed here.</p>
             </div>
-            <button class="btn whatsapp-btn" onclick="window.open('https://wa.me/917907311445')">Message on WhatsApp</button>
+            <a href="https://wa.me/917907311445" class="btn-wa">Contact for Projects</a>
         </div>
     </div>
 
     <script>
-        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-        
-        // Modal-ന് പുറത്ത് ക്ലിക്ക് ചെയ്താൽ ക്ലോസ് ആകാൻ
-        window.onclick = function(event) {
-            if (event.target.className === 'modal') {
-                event.target.style.display = 'none';
-            }
+        // പോപ്പ് അപ്പ് കാണിക്കാൻ
+        function showModal(id) {
+            document.getElementById('modal-' + id).style.display = 'flex';
+        }
+
+        // പോപ്പ് അപ്പ് ഒളിപ്പിക്കാൻ
+        function hideModal(id) {
+            document.getElementById('modal-' + id).style.display = 'none';
         }
     </script>
+
 </body>
 </html>
