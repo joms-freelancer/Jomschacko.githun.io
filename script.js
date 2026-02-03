@@ -1,4 +1,5 @@
 
+
 const content = {
 	'en': {
 		'hero-title': 'Hi, I am Joms',
@@ -81,38 +82,31 @@ window.sendMessage = function() {
     
     if (!input || !messages || input.value.trim() === "") return;
 
-    // യൂസർ അയക്കുന്ന മെസേജ് സ്ക്രീനിൽ കാണിക്കുന്നു
     const userText = input.value.trim();
     messages.innerHTML += `<div class="bg-blue-500/30 p-2 rounded-lg text-right ml-10 mb-2">${userText}</div>`;
     
+    // മലയാളം വാക്കുകൾക്ക് lowerCase ആവശ്യമില്ലെങ്കിലും ഇംഗ്ലീഷിന് ഇത് വേണം
     const lowerText = userText.toLowerCase();
     input.value = "";
 
-    // ബോട്ടിന്റെ മറുപടി ലോജിക്
     setTimeout(() => {
-        let reply = "I'm still learning! Contact Joms for more info.";
-        
-        // സ്മാർട്ട് റിപ്ലൈകൾ
-        if (lowerText.includes("hello") || lowerText.includes("hi") || lowerText.includes("ഹലോ")) {
-            reply = "Hi there! How can I assist you today? / നമസ്കാരം, എനിക്ക് എങ്ങനെ സഹായിക്കാനാകും?";
+        let reply = "I'm still learning! / എനിക്ക് ഇതിനെക്കുറിച്ച് കൂടുതൽ അറിയില്ല. ജോംസിനെ ബന്ധപ്പെടുക.";
+
+        // മലയാളം വാക്കുകൾ നേരിട്ട് ഇവിടെ നൽകുന്നു
+        if (lowerText.includes("ഹലോ") || lowerText.includes("നമസ്കാരം") || lowerText.includes("hi") || lowerText.includes("hello")) {
+            reply = "നമസ്കാരം! എനിക്ക് എങ്ങനെ സഹായിക്കാനാകും? / Hi, how can I help you?";
         } 
-        else if (lowerText.includes("services") || lowerText.includes("സേവനങ്ങൾ") || lowerText.includes("work")) {
-            reply = "Joms offers: Data Entry, Web Research, and AI/ML solutions.";
+        else if (lowerText.includes("സേവനം") || lowerText.includes("services") || lowerText.includes("ജോലി")) {
+            reply = "ഡാറ്റാ എൻട്രി, വെബ് റിസർച്ച്, പൈത്തൺ പ്രോഗ്രാമിംഗ് എന്നിവ ജോംസ് ചെയ്തു നൽകുന്നു.";
         } 
-        else if (lowerText.includes("skills") || lowerText.includes("കഴിവുകൾ")) {
-            reply = "He is expert in Python, Excel, SQL, and Machine Learning.";
-        } 
-        else if (lowerText.includes("contact") || lowerText.includes("ബന്ധപ്പെടാൻ")) {
-            reply = "You can contact Joms via email or through the social links below.";
+        else if (lowerText.includes("വിദ്യാഭ്യാസം") || lowerText.includes("പഠനം") || lowerText.includes("skills")) {
+            reply = "പൈത്തൺ, മെഷീൻ ലേണിംഗ്, എക്സൽ എന്നിവയിൽ ജോംസ് വിദഗ്ധനാണ്.";
         }
-        else if (lowerText.includes("bye") || lowerText.includes("നന്ദി")) {
-            reply = "You're welcome! Have a great day! / നന്ദി, ശുഭദിനം നേരുന്നു!";
+        else if (lowerText.includes("നന്ദി") || lowerText.includes("thanks")) {
+            reply = "നന്ദി! വീണ്ടും കാണാം.";
         }
 
-        // ബോട്ടിന്റെ മറുപടി സ്ക്രീനിൽ കാണിക്കുന്നു
         messages.innerHTML += `<div class="bg-white/10 p-2 rounded-lg mr-10 mb-2 border border-white/5">${reply}</div>`;
-        
-        // മെസേജ് കൂടുമ്പോൾ ഓട്ടോമാറ്റിക്കായി താഴേക്ക് സ്ക്രോൾ ചെയ്യാൻ
         messages.scrollTop = messages.scrollHeight;
     }, 600);
 };
