@@ -3,191 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joms Portfolio | Data Solutions Expert</title>
+    <title>Joms Portfolio | AI & WhatsApp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Base Design */
-        body {
-            background-color: #0f172a;
-            color: white;
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Glassmorphism Effect */
-        .glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-        }
-
-        /* Header Section */
-        header { text-align: center; padding: 60px 20px 30px; }
-        .profile-img {
-            width: 160px; height: 160px;
-            border-radius: 50%;
-            border: 4px solid #3b82f6;
-            object-fit: cover;
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
-            margin-bottom: 20px;
-        }
-        h1 { font-size: 3rem; margin: 10px 0; letter-spacing: -1px; }
-        .subtitle { color: #94a3b8; font-style: italic; font-size: 1.1rem; }
-
-        /* Grid Layout */
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 25px;
-            width: 90%;
-            max-width: 1100px;
-            padding: 20px 0 60px;
-        }
-
-        .box {
-            padding: 40px 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .box:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.07);
-            border-color: rgba(59, 130, 246, 0.5);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-        }
-
-        /* Modal / Popup */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(8px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .modal-content {
-            background: #1e293b;
-            padding: 40px;
-            border-radius: 30px;
-            max-width: 600px;
-            width: 100%;
-            position: relative;
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 20px; right: 25px;
-            font-size: 28px;
-            color: #64748b;
-            cursor: pointer;
-        }
-
-        /* Typography */
-        .modal-header { color: #3b82f6; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
-        .modal-body { line-height: 1.7; color: #cbd5e1; font-size: 1rem; }
-        .highlight { color: #60a5fa; font-weight: 600; }
-        
-        .services-list { list-style: none; padding: 0; }
-        .services-list li { 
-            background: rgba(255,255,255,0.03); 
-            margin-bottom: 12px; 
-            padding: 12px 15px; 
-            border-radius: 12px;
-            border-left: 4px solid #10b981;
-        }
-
-        .wa-link {
-            display: inline-block;
-            margin-top: 25px;
-            background: #22c55e;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        .wa-link:hover { transform: scale(1.05); background: #16a34a; }
+        .glass { backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); }
+        #chat-messages::-webkit-scrollbar { width: 4px; }
+        #chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
     </style>
 </head>
-<body>
+<body class="bg-slate-900 min-h-screen text-white font-sans selection:bg-blue-500 overflow-x-hidden">
+    
+    <nav class="glass sticky top-0 z-50 p-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="font-bold text-2xl text-blue-400 tracking-tighter">JOMS</h1>
+            <div class="flex space-x-2">
+                <button class="px-4 py-1 bg-white/10 rounded-full text-xs" onclick="changeLang('en')">English</button> 
+                <button class="px-4 py-1 bg-white/10 rounded-full text-xs" onclick="changeLang('ml')">മലയാളം</button>
+            </div>
+        </div>
+    </nav>
 
-    <header>
-        <img class="profile-img" src="Photo from jomon13051983 copy.jpg" onerror="this.src='https://ui-avatars.com/api/?name=Joms&size=200'">
-        <h1>Welcome</h1>
-        <p class="subtitle">Data Solutions Specialist & AI/ML Enthusiast</p>
+    <header class="max-w-4xl mx-auto text-center py-16 px-6">
+        <div class="mb-6 flex justify-center">
+            <img id="profile-img" alt="Joms Profile" class="w-44 h-44 rounded-full border-4 border-blue-500 object-cover shadow-2xl" 
+                 src="Photo from jomon13051983 copy.jpg" 
+                 onerror="this.src='https://ui-avatars.com/api/?name=Joms&background=0D8ABC&color=fff&size=200'">
+        </div>
+        <h2 class="text-5xl font-extrabold mb-4" id="hero-title">Welcome</h2>
+        <p class="text-lg text-slate-400 italic" id="hero-desc">Data Solutions Specialist & AI/ML Enthusiast</p>
     </header>
 
-    <div class="container">
-        <div class="glass box" onclick="openModal('about-modal')">
-            <h3 style="color: #60a5fa;">About Me</h3>
-            <p>Experience & Professional Vision</p>
-        </div>
-
-        <div class="glass box" onclick="openModal('services-modal')">
-            <h3 style="color: #4ade80;">Services</h3>
-            <p>Solutions, Projects & Demos</p>
-        </div>
-
-        <div class="glass box" onclick="window.open('https://wa.me/917907311445?text=Hello Joms, I would like to discuss a project!')">
-            <h3 style="color: #fb7185;">WhatsApp</h3>
-            <p>Direct Message for Consultations</p>
-        </div>
-    </div>
-
-    <div id="about-modal" class="modal-overlay" onclick="closeModal('about-modal')">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="close-btn" onclick="closeModal('about-modal')">&times;</span>
-            <h2 class="modal-header">About Me</h2>
-            <div class="modal-body">
-                <p>Hello! I am <span class="highlight">Jomon</span>, a professional <span class="highlight">Data Solutions Specialist</span> and Automation Expert dedicated to precision and efficiency.</p>
-                <p>I specialize in building custom web interfaces and intelligent tools that bridge the gap between complex data and strategic action. By integrating <span class="highlight">Python and Artificial Intelligence</span>, I transform manual, repetitive tasks into streamlined, smart workflows.</p>
-                <p>My mission is to deliver high-impact business insights through advanced automation and data visualization, ensuring that information works as a powerful asset for growth.</p>
+    <main class="max-w-6xl mx-auto pb-24 px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
+            <div class="glass p-8 rounded-3xl hover:border-blue-500 transition shadow-lg">
+                <h3 class="font-bold text-blue-400 mb-3" id="box1-title">About Me</h3>
+                <p class="text-xs text-slate-400" id="box1-desc">Expert in Data Management</p>
+            </div>
+            <div class="glass p-8 rounded-3xl hover:border-green-500 transition shadow-lg">
+                <h3 class="font-bold text-green-400 mb-3" id="box2-title">Services</h3>
+                <p class="text-xs text-slate-400" id="box2-desc">Automation & Demos</p>
+            </div>
+            <div class="glass p-8 rounded-3xl hover:border-purple-500 transition shadow-lg">
+                <h3 class="font-bold text-purple-400 mb-3" id="box3-title">Skills</h3>
+                <p class="text-xs text-slate-400" id="box3-desc">Python & Web Tools</p>
+            </div>
+            <div class="glass p-8 rounded-3xl hover:border-emerald-500 transition shadow-lg cursor-pointer" onclick="window.open('https://wa.me/917907311445')">
+                <h3 class="font-bold text-emerald-400 mb-3" id="box4-title">WhatsApp</h3>
+                <p class="text-xs text-slate-400" id="box4-desc">Direct Chat</p>
             </div>
         </div>
-    </div>
+    </main>
 
-    <div id="services-modal" class="modal-overlay" onclick="closeModal('services-modal')">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="close-btn" onclick="closeModal('services-modal')">&times;</span>
-            <h2 class="modal-header" style="color: #4ade80;">Professional Services</h2>
-            <div class="modal-body">
-                <ul class="services-list">
-                    <li><strong>Data Management:</strong> High-accuracy data processing and mining.</li>
-                    <li><strong>Intelligent Automation:</strong> Custom Python scripts and AI integration.</li>
-                    <li><strong>Web Interface Development:</strong> Building tools to visualize and manage data.</li>
-                </ul>
-                <p style="font-size: 0.85rem; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; margin-top: 15px;">
-                    <span style="color: #fb923c; font-weight: bold;">Project Showcase:</span> I am currently integrating live demos of my latest web development projects. Links will be active shortly.
-                </p>
-                <a href="https://wa.me/917907311445" class="wa-link">Discuss Your Project</a>
-            </div>
+    <button class="fixed bottom-6 right-6 w-16 h-16 bg-blue-600 text-white rounded-full shadow-2xl z-50 flex items-center justify-center text-2xl hover:scale-110 transition" onclick="toggleChat()">💬</button>
+
+    <div id="chat-window" class="fixed bottom-24 right-6 w-80 h-[450px] glass rounded-2xl shadow-2xl z-50 hidden flex-col overflow-hidden border border-white/20 bg-slate-900/95">
+        <div class="bg-blue-600 p-4 font-bold flex justify-between items-center">
+            <span class="text-sm">Joms AI Bot</span>
+            <button onclick="toggleChat()">✕</button>
+        </div>
+        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-4 text-sm bg-transparent">
+            <div class="bg-white/10 p-3 rounded-2xl rounded-tl-none mr-10">Hi! How can I help you today?</div>
+        </div>
+        <div class="p-3 bg-white/5 border-t border-white/10 flex gap-2">
+            <input id="chat-input" type="text" class="bg-white/10 border-none outline-none w-full text-sm rounded-xl px-4 py-2" placeholder="Ask AI...">
+            <button onclick="sendMessage()" class="bg-blue-600 p-2 rounded-xl">➤</button>
         </div>
     </div>
 
     <script>
-        function openModal(id) {
-            document.getElementById(id).style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+        const API_KEY = "AIzaSyC0BrAbFI_x81iaYl_zzGgj5z1wqbkg4OM"; 
+
+        function toggleChat() { document.getElementById('chat-window').classList.toggle('hidden'); }
+
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const messages = document.getElementById('chat-messages');
+            const userText = input.value.trim();
+            if (!userText) return;
+
+            messages.innerHTML += `<div class="flex justify-end"><div class="bg-blue-600 p-2 rounded-lg">${userText}</div></div>`;
+            input.value = "";
+            messages.scrollTop = messages.scrollHeight;
+
+            try {
+                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: userText }] }] })
+                });
+                const data = await res.json();
+                if (data.candidates) {
+                    const aiText = data.candidates[0].content.parts[0].text;
+                    messages.innerHTML += `<div class="flex justify-start"><div class="bg-white/10 p-2 rounded-lg">${aiText}</div></div>`;
+                }
+            } catch (e) {
+                messages.innerHTML += `<div class="text-red-400 text-xs text-center">AI Error: Try later or use WhatsApp</div>`;
+            }
+            messages.scrollTop = messages.scrollHeight;
         }
-        function closeModal(id) {
-            document.getElementById(id).style.display = 'none';
-            document.body.style.overflow = 'auto';
+
+        const content = {
+            'en': { 'hero-title': 'Welcome', 'hero-desc': 'Data Solutions Specialist & AI/ML Enthusiast' },
+            'ml': { 'hero-title': 'സ്വാഗതം', 'hero-desc': 'ഡാറ്റാ വിദഗ്ധനും AI പഠിതാവുമാണ്' }
+        };
+        function changeLang(l) {
+            document.getElementById('hero-title').innerText = content[l]['hero-title'];
+            document.getElementById('hero-desc').innerText = content[l]['hero-desc'];
         }
+        document.getElementById('chat-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') sendMessage(); });
     </script>
 </body>
 </html>
