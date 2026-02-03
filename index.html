@@ -5,58 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Joms Portfolio | AI Assistant</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
 </head>
-<body class="bg-slate-900 text-white font-sans">
-    <nav class="bg-white/10 p-4 border-b border-white/10">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <h1 class="font-bold text-2xl">JOMS</h1>
-            <button class="bg-blue-600 px-4 py-1 rounded-lg text-sm" onclick="toggleChat()">Chat with AI</button>
-        </div>
+<body class="bg-slate-900 min-h-screen text-white font-sans overflow-x-hidden relative">
+    
+    <nav class="backdrop-blur-md bg-white/10 sticky top-0 z-50 border-b border-white/10 p-4 text-center">
+        <h1 class="font-bold text-2xl tracking-tight">JOMS</h1>
     </nav>
 
-    <main class="max-w-4xl mx-auto py-20 px-6 text-center">
-        <h2 class="text-5xl font-bold mb-4">Welcome</h2>
-        <p class="text-xl text-slate-400 mb-8">Data Entry Expert & AI Enthusiast</p>
-        <div class="bg-white/10 p-6 rounded-2xl border border-white/20">
-            <h3 class="text-xl font-bold mb-2">Contact Me</h3>
-            <p>Email: jomonc60@gmail.com</p>
+    <header class="relative max-w-4xl mx-auto text-center py-16 px-6 fade-in">
+        <div class="mb-6 flex justify-center">
+            <img alt="Joms Profile" 
+                 class="w-40 h-40 rounded-full border-4 border-white/20 shadow-2xl object-cover" 
+                 src="https://raw.githubusercontent.com/joms-freelancer/Jomschacko.github.io/main/Photo%20from%20jomon13051983%20copy.jpg">
+        </div>
+        <h2 class="text-5xl font-extrabold text-white mb-4">Hi, I'm Joms</h2>
+        <p class="text-lg text-slate-300">Data Entry Expert & AI/ML Enthusiast</p>
+    </header>
+
+    <main class="relative max-w-4xl mx-auto pb-20 px-6">
+        <div class="bg-white/10 p-8 rounded-3xl border border-white/20 text-center">
+            <h3 class="text-2xl font-bold mb-4 text-blue-400">Contact Details</h3>
+            <p class="text-slate-200">Email: **jomonc60@gmail.com**</p>
+            <p class="text-slate-400 mt-2 text-sm">Feel free to reach out for any data entry or AI projects.</p>
         </div>
     </main>
 
-    <div id="chat-window" class="fixed bottom-24 right-6 w-80 h-96 bg-gray-900 border border-white/20 rounded-2xl shadow-2xl hidden flex-col">
-        <div class="bg-blue-600 p-4 font-bold rounded-t-2xl">Joms AI Assistant</div>
-        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 text-sm"></div>
-        <div class="p-3 border-t border-white/10 flex">
-            <input id="chat-input" type="text" class="bg-transparent outline-none w-full" placeholder="Ask anything...">
-            <button onclick="sendMessage()" class="text-blue-400 font-bold">Send</button>
+    <button class="fixed bottom-6 right-6 w-14 h-14 bg-blue-600 text-white rounded-full shadow-2xl flex items-center justify-center z-50" onclick="toggleChat()">
+        <svg class="h-6 w-6" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+    </button>
+
+    <div id="chat-window" class="fixed bottom-24 right-6 w-80 h-96 backdrop-blur-xl bg-gray-900/95 border border-white/20 rounded-2xl shadow-2xl z-50 hidden flex-col overflow-hidden">
+        <div class="bg-blue-600 p-4 text-white font-bold flex justify-between items-center">
+            <span>Joms AI Bot</span>
+            <button onclick="toggleChat()" class="text-xl">✕</button>
+        </div>
+        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 text-sm text-white h-64">
+            <div class="bg-white/10 p-2 rounded-lg">Hello! Ask me anything about Joms.</div>
+        </div>
+        <div class="p-3 bg-black/40 border-t border-white/10 flex">
+            <input id="chat-input" type="text" class="bg-transparent border-none outline-none text-white w-full text-sm" placeholder="Ask AI...">
+            <button onclick="sendMessage()" class="text-blue-400 font-bold ml-2">Send</button>
         </div>
     </div>
 
     <script>
-        const API_KEY = "AIzaSyAxbOwy6aA_QrL7FjZ_c4Tf4kKjJzyAflo"; // From Screenshot 1
+        const API_KEY = "AIzaSyAxbOwy6aA_QrL7FjZ_c4Tf4kKjJzyAflo";
         window.toggleChat = () => document.getElementById('chat-window').classList.toggle('hidden');
 
-        async function sendMessage() {
+        window.sendMessage = async () => {
             const input = document.getElementById('chat-input');
             const messages = document.getElementById('chat-messages');
             if (!input.value.trim()) return;
 
-            const userText = input.value;
-            messages.innerHTML += `<div class="text-right text-blue-400">You: ${userText}</div>`;
-            input.value = "";
-
+            messages.innerHTML += `<div class="bg-blue-600/40 p-2 rounded-lg text-right ml-10 mb-2">${input.value}</div>`;
+            const loadingId = "loading-" + Date.now();
+            messages.innerHTML += `<div id="${loadingId}" class="bg-white/10 p-2 rounded-lg mr-10 mb-2 italic">Thinking...</div>`;
+            
             try {
                 const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
                     method: "POST", headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: userText }] }] })
+                    body: JSON.stringify({ contents: [{ parts: [{ text: input.value }] }] })
                 });
                 const data = await res.json();
-                messages.innerHTML += `<div class="text-left text-gray-300">AI: ${data.candidates[0].content.parts[0].text}</div>`;
+                document.getElementById(loadingId).remove();
+                messages.innerHTML += `<div class="bg-white/20 p-2 rounded-lg mr-10 mb-2">${data.candidates[0].content.parts[0].text}</div>`;
             } catch (e) {
-                messages.innerHTML += `<div class="text-red-400">Error: Please enable HTTPS in GitHub Settings.</div>`;
+                document.getElementById(loadingId).innerText = "Please enable HTTPS to use AI.";
             }
+            input.value = "";
             messages.scrollTop = messages.scrollHeight;
-        }
+        };
     </script>
 </body>
 </html>
