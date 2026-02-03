@@ -108,7 +108,8 @@
 
             try {
                 // gemini-1.5-flash ഉപയോഗിച്ചുള്ള സ്റ്റേബിൾ URL
-                const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+                // പഴയ ലിങ്കിന് പകരം ഇത് ഉപയോഗിക്കുക (v1beta + gemini-pro)
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
                 
                 const response = await fetch(url, {
                     method: "POST",
