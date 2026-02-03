@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Skills | Joms</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .skill-card { 
+            backdrop-filter: blur(16px); 
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .skill-card:hover { 
+            transform: translateY(-10px) scale(1.02);
+            border-color: #60a5fa;
+            background: rgba(96, 165, 250, 0.05);
+        }
+        .progress-bar {
+            height: 6px;
+            background: #1e293b;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            width: 0%;
+            transition: width 1.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-white font-sans selection:bg-blue-500 min-h-screen p-6 md:p-12">
+
+    <div class="max-w-5xl mx-auto">
+        <div class="flex justify-between items-center mb-12">
+            <a href="index.html" class="text-blue-400 hover:text-white transition flex items-center gap-2">
+                <span>←</span> Back to Home
+            </a>
+            <div class="flex gap-2">
+                <button onclick="changeLang('en')" class="text-xs bg-white/10 px-3 py-1 rounded-full hover:bg-white/20">English</button>
+                <button onclick="changeLang('ml')" class="text-xs bg-white/10 px-3 py-1 rounded-full hover:bg-white/20">മലയാളം</button>
+            </div>
+        </div>
+
+        <div class="text-center mb-16">
+            <h1 class="text-5xl font-black mb-4 tracking-tighter bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent" id="page-title">
+                Technical Expertise
+            </h1>
+            <p class="text-slate-400 text-lg italic" id="page-subtitle">Unmatched proficiency in AI, Data, and Automation</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <div class="skill-card p-8 rounded-3xl">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-blue-400" id="skill1-title">Advanced Python Architecture</h2>
+                    <span class="text-xs font-mono text-slate-500">100%</span>
+                </div>
+                <p class="text-sm text-slate-400 mb-6" id="skill1-desc">Architecting complex automation engines and scalable backend systems with zero-latency efficiency.</p>
+                <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+            </div>
+
+            <div class="skill-card p-8 rounded-3xl">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-purple-400" id="skill2-title">AI & Neural Integration</h2>
+                    <span class="text-xs font-mono text-slate-500">95%</span>
+                </div>
+                <p class="text-sm text-slate-400 mb-6" id="skill2-desc">Integrating cutting-edge LLMs (Gemini, GPT) and custom ML models into real-world business workflows.</p>
+                <div class="progress-bar"><div class="progress-fill" style="width: 95%;"></div></div>
+            </div>
+
+            <div class="skill-card p-8 rounded-3xl">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-green-400" id="skill3-title">Big Data & Solutions</h2>
+                    <span class="text-xs font-mono text-slate-500">98%</span>
+                </div>
+                <p class="text-sm text-slate-400 mb-6" id="skill3-desc">Transforming massive, unorganized datasets into clean, actionable intelligence and visual dashboards.</p>
+                <div class="progress-bar"><div class="progress-fill" style="width: 98%;"></div></div>
+            </div>
+
+            <div class="skill-card p-8 rounded-3xl">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-orange-400" id="skill4-title">Web Automation Systems</h2>
+                    <span class="text-xs font-mono text-slate-500">92%</span>
+                </div>
+                <p class="text-sm text-slate-400 mb-6" id="skill4-desc">Building high-performance web interfaces and automated scraping/deployment pipelines.</p>
+                <div class="progress-bar"><div class="progress-fill" style="width: 92%;"></div></div>
+            </div>
+
+        </div>
+
+        <div class="mt-20 text-center p-12 glass rounded-3xl border-dashed border-2 border-white/10">
+            <h3 class="text-2xl font-bold mb-4" id="footer-cta">Ready to build something extraordinary?</h3>
+            <p class="text-slate-400 mb-6" id="footer-sub">Stop looking for developers. Start looking for solutions.</p>
+            <a href="mailto:jomon13051983@gmail.com" class="text-blue-400 font-bold hover:underline">jomon13051983@gmail.com</a>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            'en': {
+                'page-title': 'Technical Expertise',
+                'page-subtitle': 'Unmatched proficiency in AI, Data, and Automation',
+                'skill1-title': 'Advanced Python Architecture',
+                'skill1-desc': 'Architecting complex automation engines and scalable backend systems with zero-latency efficiency.',
+                'skill2-title': 'AI & Neural Integration',
+                'skill2-desc': 'Integrating cutting-edge LLMs (Gemini, GPT) and custom ML models into real-world business workflows.',
+                'skill3-title': 'Big Data & Solutions',
+                'skill3-desc': 'Transforming massive, unorganized datasets into clean, actionable intelligence and visual dashboards.',
+                'skill4-title': 'Web Automation Systems',
+                'skill4-desc': 'Building high-performance web interfaces and automated scraping/deployment pipelines.',
+                'footer-cta': 'Ready to build something extraordinary?',
+                'footer-sub': 'Stop looking for developers. Start looking for solutions.'
+            },
+            'ml': {
+                'page-title': 'സാങ്കേതിക വൈദഗ്ധ്യം',
+                'page-subtitle': 'AI, ഡാറ്റ, ഓട്ടോമേഷൻ എന്നിവയിലെ അത്യുജ്ജ্বলമായ മികവ്',
+                'skill1-title': 'അഡ്വാൻസ്ഡ് പൈത്തൺ ആർക്കിടെക്ചർ',
+                'skill1-desc': 'സങ്കീർണ്ണമായ ഓട്ടോമേഷൻ എൻജിനുകളും സ്കെയിലബിൾ സിസ്റ്റങ്ങളും നിർമ്മിക്കുന്നതിൽ പൂർണ്ണ വൈദഗ്ധ്യം.',
+                'skill2-title': 'AI & ന്യൂറൽ ഇന്റഗ്രേഷൻ',
+                'skill2-desc': 'അത്യാധുനിക AI മോഡലുകളെ (Gemini, GPT) ബിസിനസ്സ് വർക്ക്ഫ്ലോകളിലേക്ക് വിജയകരമായി എത്തിക്കുന്നു.',
+                'skill3-title': 'ബിഗ് ഡാറ്റ സൊല്യൂഷൻസ്',
+                'skill3-desc': 'വിപുലമായ ഡാറ്റാശേഖരങ്ങളെ അപഗ്രഥിച്ച് ബിസിനസ്സ് വളർച്ചയ്ക്കായുള്ള കൃത്യമായ വിവരങ്ങളാക്കി മാറ്റുന്നു.',
+                'skill4-title': 'വെബ് ഓട്ടോമേഷൻ സിസ്റ്റംസ്',
+                'skill4-desc': 'ഹൈ-പെർഫോമൻസ് വെബ് ഇന്റർഫേസുകളും ഓട്ടോമേറ്റഡ് ഡെപ്ലോയ്മെന്റ് പൈപ്പ്‌ലൈനുകളും നിർമ്മിക്കുന്നു.',
+                'footer-cta': 'അസാധാരണമായ ഒന്ന് നിർമ്മിക്കാൻ തയ്യാറാണോ?',
+                'footer-sub': 'വെറുമൊരു ഡെവലപ്പറെയല്ല, കൃത്യമായ പരിഹാരങ്ങളാണ് നിങ്ങൾ തേടേണ്ടത്.'
+            }
+        };
+
+        function changeLang(lang) {
+            const t = translations[lang];
+            for (let key in t) {
+                document.getElementById(key).innerText = t[key];
+            }
+        }
+    </script>
+</body>
+</html>
