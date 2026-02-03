@@ -63,16 +63,25 @@
         <svg class="h-6 w-6" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"><path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
     </button>
 
-    <div class="fixed bottom-24 right-6 w-80 h-96 backdrop-blur-xl bg-white/10 border border-white/30 rounded-3xl shadow-2xl z-50 hidden flex-col overflow-hidden" id="chat-window">
-        <div class="bg-blue-600/50 p-4 text-white font-bold flex justify-between">
-            <span>Joms AI Assistant</span> <button onclick="toggleChat()">✕</button>
+  <button class="fixed bottom-6 right-6 w-14 h-14 bg-blue-600 text-white rounded-full shadow-2xl flex items-center justify-center z-50 hover:scale-110 transition" onclick="toggleChat()">
+        <svg class="h-6 w-6" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"><path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+    </button>
+
+    <div class="fixed bottom-24 right-6 w-80 h-[450px] backdrop-blur-xl bg-gray-900/90 border border-white/20 rounded-2xl shadow-2xl z-50 hidden flex-col overflow-hidden" id="chat-window">
+        <div class="bg-blue-600 p-4 text-white font-bold flex justify-between items-center">
+            <span>Joms AI Assistant</span>
+            <button onclick="toggleChat()" class="hover:text-gray-300 text-xl">✕</button>
         </div>
-        <div class="flex-1 p-4 overflow-y-auto space-y-3 text-sm text-white" id="chat-messages">
-            <div class="bg-white/20 p-2 rounded-lg">Hello! How can I help you today?</div>
+        
+        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 text-sm text-white scroll-smooth" style="max-height: 330px; display: block;">
+            <div class="bg-white/10 p-3 rounded-lg border border-white/5">
+                Hello! How can I help you today?
+            </div>
         </div>
-        <div class="p-3 bg-black/20 border-t border-white/20 flex">
-            <input class="bg-transparent border-none outline-none text-white w-full placeholder-white/50 text-xs" id="chat-input" placeholder="Type a message..." type="text">
-            <button class="text-blue-400 font-bold ml-2" onclick="sendMessage()">Send</button>
+
+        <div class="p-3 bg-black/40 border-t border-white/10 flex items-center">
+            <input class="bg-transparent border-none outline-none text-white w-full placeholder-white/40 text-sm" id="chat-input" placeholder="Type a message..." type="text" autocomplete="off">
+            <button class="text-blue-400 font-bold ml-2 hover:text-blue-300" onclick="sendMessage()">Send</button>
         </div>
     </div>
 
