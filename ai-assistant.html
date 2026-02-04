@@ -20,7 +20,6 @@
             animation: wave 2s linear infinite;
             transform-origin: 70% 70%;
         }
-
         .typing-text {
             overflow: hidden;
             white-space: nowrap;
@@ -29,7 +28,6 @@
             animation: typing 2s steps(40, end) forwards;
             border-right: 2px solid #3b82f6;
         }
-
         @keyframes typing {
             from { width: 0 }
             to { width: 100% }
@@ -46,48 +44,25 @@
         <h1 class="text-4xl font-bold mb-6 text-green-400">AI Customer Assistant</h1>
 
         <div class="w-full min-h-[450px] bg-slate-800/50 rounded-3xl shadow-2xl flex flex-col items-center justify-center p-8 border border-white/10">
-            
             <div class="relative w-24 h-24 bg-blue-600 rounded-full flex items-center justify-center mb-6 text-5xl shadow-lg">
                 <span class="block animate-wave transform -translate-y-2">👋</span>
                 <span class="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-1/2 text-2xl">🤖</span>
             </div>
 
             <div class="bg-white/5 text-white p-6 rounded-2xl max-w-lg text-center border border-white/10 mb-8 min-h-[100px] flex items-center justify-center">
-                <span id="bot-message" class="typing-text">
-                    Hi, I am your assistant. What would you like to know?
-                </span>
+                <span id="bot-message" class="typing-text">Hi, I am your assistant. What would you like to know?</span>
             </div>
 
             <div class="w-full max-w-md">
-                <input type="text" 
-                       id="user-input"
-                       onkeypress="handleQuery(event)"
-                       class="w-full p-4 rounded-2xl bg-slate-900 border border-white/20 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-inner" 
-                       placeholder="Type your question (e.g. service, price)...">
+                <input type="text" id="user-input" onkeypress="handleQuery(event)" class="w-full p-4 rounded-2xl bg-slate-900 border border-white/20 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-inner" placeholder="Type your question...">
                 <p class="text-[10px] text-slate-500 mt-3 text-center uppercase tracking-widest">Press Enter to Chat</p>
             </div>
         </div>
     </div>
 
-    <script>
-        // ഡാറ്റ നേരിട്ട് ഇവിടെ ഉൾപ്പെടുത്തുന്നു (Confusions ഒഴിവാക്കാൻ)
-        const botData = [
-            { question: "service", answer: "Joms offers Data Solutions, Python Automation, and AI integration services." },
-            { question: "services", answer: "Joms offers Data Solutions, Python Automation, and AI integration services." },
-            { question: "contact", answer: "You can reach out via email at jomon13051983@gmail.com." },
-            { question: "who are you", answer: "I am Joms's AI Assistant, designed to help you with your queries." },
-            { question: "price", answer: "Pricing depends on the project's complexity. Please contact Joms for a quote." },
-            { question: "ai assistant", answer: "An AI assistant is a smart chatbot that uses Natural Language Processing to interact with users like a human." },
-            { question: "24/7", answer: "Yes, it provides round-the-clock support without breaks or delays." },
-            { question: "languages", answer: "It is multilingual, supporting English, Malayalam, Hindi, Arabic, and 50+ other languages." },
-            { question: "whatsapp", answer: "Yes, it can connect via the WhatsApp Business API." },
-            { question: "secure", answer: "Yes, we use industry-standard encryption for all data handling." },
-            { question: "fast", answer: "Usually under 2 seconds." },
-            { question: "offline", answer: "No, it requires an internet connection to access the AI brain." },
-            { question: "cost", answer: "It depends on the complexity (Basic vs Advanced). Contact Joms for details." }
-            // ഇവിടെ നിങ്ങൾക്ക് ബാക്കി 100 ചോദ്യങ്ങളും ഇതേ ഫോർമാറ്റിൽ ചേർക്കാം
-        ];
+    <script src="bot-data.js"></script>
 
+    <script>
         function handleQuery(event) {
             if (event.key === "Enter") {
                 const inputField = document.getElementById('user-input');
@@ -96,13 +71,12 @@
 
                 if (!userQuery) return;
 
-                // Reset UI for new message
                 displayArea.classList.remove('typing-text');
-                void displayArea.offsetWidth; // Trigger reflow to restart animation if needed
+                void displayArea.offsetWidth;
                 displayArea.style.width = 'auto';
                 displayArea.style.borderRight = 'none';
 
-                // 1. Greetings Logic
+                // 1. Greetings
                 const greetings = ["hi", "hello", "hoi", "hai"];
                 if (greetings.includes(userQuery)) {
                     displayArea.innerText = userQuery.charAt(0).toUpperCase() + userQuery.slice(1) + "!";
@@ -110,20 +84,17 @@
                     return;
                 }
 
-                // 2. Search Logic (Identify matching keywords)
+                // 2. Logic
                 let response = "I'm sorry, I don't have information on that.";
                 
-                // Advanced matching: checks if userQuery is in DB or vice versa
-                const found = botData.find(item => {
-                    const dbQuestion = item.question.toLowerCase();
-                    return userQuery.includes(dbQuestion) || dbQuestion.includes(userQuery);
-                });
-
-                if (found) {
-                    response = found.answer;
+                if (window.botData) {
+                    const found = window.botData.find(item => {
+                        const dbQ = item.question.toLowerCase();
+                        return userQuery.includes(dbQ) || dbQ.includes(userQuery);
+                    });
+                    if (found) response = found.answer;
                 }
 
-                // Show response
                 displayArea.innerText = response;
                 inputField.value = "";
             }
