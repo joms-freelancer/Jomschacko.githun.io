@@ -3,71 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Dashboard | Joms</title>
+    <title>Predictive Dashboard | Joms</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        /* CSS ഉപയോഗിച്ച് ഗ്രാഫ് അനിമേഷൻ */
+        .bar { transition: height 1.5s ease-in-out; }
+        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
 </head>
-<body class="bg-slate-950 text-white p-6">
+<body class="bg-slate-950 text-white p-8">
 
-    <div class="max-w-5xl mx-auto">
-        <a href="services.html" class="text-green-400 text-sm mb-4 inline-block">← Back</a>
-        <h1 class="text-3xl font-bold mb-8">Predictive <span class="text-green-400">Analysis</span></h1>
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8 text-green-400">AI Growth Prediction</h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="md:col-span-2 bg-slate-900 border border-white/10 p-6 rounded-3xl min-h-[400px]">
-                <h3 class="mb-6 text-slate-400">Market Growth Forecast</h3>
-                <div style="position: relative; height:300px; width:100%">
-                    <canvas id="myChart"></canvas>
-                </div>
+        <div class="glass p-8 rounded-3xl h-[400px] flex items-end justify-around gap-4 overflow-hidden relative">
+            
+            <div class="absolute inset-0 p-8 flex flex-col justify-between opacity-10 pointer-events-none">
+                <div class="border-b border-white w-full"></div>
+                <div class="border-b border-white w-full"></div>
+                <div class="border-b border-white w-full"></div>
+                <div class="border-b border-white w-full"></div>
             </div>
 
-            <div class="bg-slate-900 border border-white/10 p-6 rounded-3xl">
-                <h3 class="mb-6 text-slate-400">AI Insights</h3>
-                <div class="space-y-4 text-sm">
-                    <div class="p-3 bg-green-500/10 border-l-2 border-green-500 rounded">
-                        Accuracy: 98.2%
-                    </div>
-                    <div class="p-3 bg-blue-500/10 border-l-2 border-blue-500 rounded">
-                        Trend: Bullish
-                    </div>
-                </div>
+            <div class="flex flex-col items-center gap-2 w-full">
+                <div class="bar w-full bg-green-500/20 border-t-2 border-green-500 rounded-t-lg" style="height: 40%"></div>
+                <span class="text-[10px] text-slate-500">Jan</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 w-full">
+                <div class="bar w-full bg-green-500/30 border-t-2 border-green-500 rounded-t-lg" style="height: 65%"></div>
+                <span class="text-[10px] text-slate-500">Feb</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 w-full">
+                <div class="bar w-full bg-green-500/40 border-t-2 border-green-500 rounded-t-lg" style="height: 55%"></div>
+                <span class="text-[10px] text-slate-500">Mar</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 w-full">
+                <div class="bar w-full bg-green-500/60 border-t-2 border-green-500 rounded-t-lg" style="height: 85%"></div>
+                <span class="text-[10px] text-slate-500">Apr (Predictive)</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 w-full">
+                <div class="bar w-full bg-green-500/90 border-t-2 border-green-500 shadow-[0_0_15px_rgba(34,197,94,0.5)] rounded-t-lg" style="height: 95%"></div>
+                <span class="text-[10px] text-green-400 font-bold">May</span>
+            </div>
+        </div>
+
+        <div class="mt-8 grid grid-cols-2 gap-4">
+            <div class="glass p-4 rounded-2xl">
+                <p class="text-xs text-slate-500 uppercase tracking-widest">Growth Rate</p>
+                <h2 class="text-2xl font-bold text-green-400">+42.5%</h2>
+            </div>
+            <div class="glass p-4 rounded-2xl">
+                <p class="text-xs text-slate-500 uppercase tracking-widest">Confidence</p>
+                <h2 class="text-2xl font-bold text-blue-400">98%</h2>
             </div>
         </div>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // ചാർട്ട് വരയ്ക്കാൻ തുടങ്ങുന്നു
-            const ctx = document.getElementById('myChart');
-            
-            if (typeof Chart === 'undefined') {
-                alert("Chart.js ലോഡ് ആയില്ല! ഇന്റർനെറ്റ് ഉണ്ടെന്ന് ഉറപ്പുവരുത്തുക.");
-                return;
-            }
-
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                    datasets: [{
-                        label: 'Growth %',
-                        data: [10, 25, 15, 40, 35, 60],
-                        borderColor: '#22c55e',
-                        backgroundColor: 'rgba(34, 197, 94, 0.2)',
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: { grid: { color: '#1e293b' } },
-                        x: { grid: { display: false } }
-                    }
-                }
-            });
-        });
-    </script>
 </body>
 </html>
