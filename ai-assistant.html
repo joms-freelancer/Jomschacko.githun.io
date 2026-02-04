@@ -3,23 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Customer Assistant | Joms</title>
+    <title>AI Assistant | Joms</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @keyframes wave {
-            0% { transform: rotate(0deg); }
-            10% { transform: rotate(14deg); }
-            20% { transform: rotate(-8deg); }
-            30% { transform: rotate(14deg); }
-            40% { transform: rotate(-4deg); }
-            50% { transform: rotate(10deg); }
-            60% { transform: rotate(0deg); }
-            100% { transform: rotate(0deg); }
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(15deg); }
+            75% { transform: rotate(-15deg); }
         }
-        .animate-wave {
-            animation: wave 2s linear infinite;
-            transform-origin: 70% 70%;
-        }
+        .animate-wave { animation: wave 2s ease-in-out infinite; }
+        
         .typing-text {
             overflow: hidden;
             white-space: nowrap;
@@ -28,41 +21,180 @@
             animation: typing 2s steps(40, end) forwards;
             border-right: 2px solid #3b82f6;
         }
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+
+        /* Custom Scrollbar for Modal */
+        #category-container::-webkit-scrollbar { width: 6px; }
+        #category-container::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
     </style>
 </head>
-<body class="bg-slate-950 text-white font-sans min-h-screen p-6 md:p-12">
+<body class="bg-slate-950 text-white font-sans min-h-screen p-4 md:p-12">
 
     <div class="max-w-4xl mx-auto">
         <a href="services.html" class="text-green-400 hover:text-white transition flex items-center gap-2 mb-8">
             <span>←</span> Back to Services
         </a>
 
-        <h1 class="text-4xl font-bold mb-6 text-green-400">AI Customer Assistant</h1>
+        <h1 class="text-3xl font-bold mb-6 text-green-400">AI Customer Assistant</h1>
 
-        <div class="w-full min-h-[450px] bg-slate-800/50 rounded-3xl shadow-2xl flex flex-col items-center justify-center p-8 border border-white/10">
-            <div class="relative w-24 h-24 bg-blue-600 rounded-full flex items-center justify-center mb-6 text-5xl shadow-lg">
-                <span class="block animate-wave transform -translate-y-2">👋</span>
-                <span class="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-1/2 text-2xl">🤖</span>
+        <div class="w-full bg-slate-900/50 rounded-3xl shadow-2xl flex flex-col items-center p-6 md:p-10 border border-white/10">
+            
+            <div class="relative w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mb-6 text-4xl shadow-lg">
+                <span class="animate-wave">👋</span>
+                <span class="absolute -bottom-1 -right-1 text-xl">🤖</span>
             </div>
 
-            <div class="bg-white/5 text-white p-6 rounded-2xl max-w-lg text-center border border-white/10 mb-8 min-h-[100px] flex items-center justify-center">
-                <span id="bot-message" class="typing-text">Hi, I am your assistant. What would you like to know?</span>
+            <div class="bg-white/5 text-white p-5 rounded-2xl w-full max-w-lg text-center border border-white/5 mb-6 min-h-[90px] flex items-center justify-center">
+                <span id="bot-message" class="typing-text leading-relaxed">
+                    Hi, I am Joms's AI assistant. Ask me anything!
+                </span>
+            </div>
+
+            <div class="flex flex-wrap gap-2 justify-center mb-8 max-w-lg">
+                <button onclick="askQuick('services')" class="px-4 py-2 bg-green-500/10 border border-green-500/30 rounded-full text-xs hover:bg-green-500 transition">Our Services</button>
+                <button onclick="askQuick('contact')" class="px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-full text-xs hover:bg-blue-500 transition">Contact Info</button>
+                <button onclick="askQuick('price')" class="px-4 py-2 bg-purple-500/10 border border-purple-500/30 rounded-full text-xs hover:bg-purple-500 transition">Pricing</button>
             </div>
 
             <div class="w-full max-w-md">
-                <input type="text" id="user-input" onkeypress="handleQuery(event)" class="w-full p-4 rounded-2xl bg-slate-900 border border-white/20 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-inner" placeholder="Type your question...">
-                <p class="text-[10px] text-slate-500 mt-3 text-center uppercase tracking-widest">Press Enter to Chat</p>
+                <input type="text" id="user-input" onkeypress="handleQuery(event)" 
+                       class="w-full p-4 rounded-2xl bg-slate-950 border border-white/10 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-inner" 
+                       placeholder="Type a question and press Enter...">
+                
+                <div class="mt-4 text-center">
+                    <button onclick="openHelpModal()" class="text-xs text-slate-500 hover:text-green-400 underline transition underline-offset-4">
+                        Don't know what to ask? Explore categories
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="bot-data.js"></script>
+    <div id="helpModal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-white/10 w-full max-w-2xl max-h-[85vh] rounded-3xl overflow-hidden flex flex-col shadow-2xl">
+            <div class="p-6 border-b border-white/10 flex justify-between items-center bg-slate-800/50">
+                <h2 class="text-xl font-bold text-green-400">Knowledge Base</h2>
+                <button onclick="closeHelpModal()" class="text-white hover:text-red-400 text-3xl leading-none">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-3" id="category-container">
+                </div>
+        </div>
+    </div>
 
     <script>
+        // Full Data (100 Questions)
+        const botData = [
+            // Category 1
+            { question: "what is an ai customer assistant", answer: "An AI assistant is a smart chatbot that uses Natural Language Processing to interact with users like a human." },
+            { question: "different from a standard chatbot", answer: "Yes. Standard bots follow a rigid script; this AI understands intent and handles conversational context." },
+            { question: "24/7", answer: "Yes, it provides round-the-clock support without breaks or delays." },
+            { question: "languages", answer: "It is multilingual, supporting English, Malayalam, Hindi, Arabic, and 50+ other languages." },
+            { question: "multiple customers", answer: "Yes, it can manage thousands of simultaneous conversations without slowing down." },
+            { question: "sound like a robot", answer: "No, the responses are generated to be natural, empathetic, and professional." },
+            { question: "images and videos", answer: "Yes, it can share product photos, demo videos, and links." },
+            { question: "mobile-friendly", answer: "Yes, the chat interface is fully responsive on all devices." },
+            { question: "typos", answer: "Yes, AI understands the meaning even if the user makes spelling mistakes." },
+            { question: "past interactions", answer: "Within a session, it remembers what was said earlier to provide relevant follow-up answers." },
+            { question: "existing website", answer: "Yes, it requires just one line of code to be embedded." },
+            { question: "manual updates", answer: "No, once trained, it uses its knowledge base to answer automatically." },
+            { question: "name", answer: "Yes, if the user is logged in or provides their name, the bot uses it." },
+            { question: "limit", answer: "No, it can be trained on thousands of pages of information." },
+            { question: "jokes", answer: "Yes, we can enable 'Small Talk' to make the bot more engaging." },
+            // Category 2
+            { question: "book appointments", answer: "Yes, it integrates with Google Calendar or Calendly to schedule meetings." },
+            { question: "generate leads", answer: "Yes, it captures names, emails, and phone numbers during the chat." },
+            { question: "take orders", answer: "Yes, it can guide users through a product catalog and take order details." },
+            { question: "process payments", answer: "Yes, by providing secure links to Stripe, PayPal, or Razorpay." },
+            { question: "track orders", answer: "Yes, it can give real-time order status if connected to your database." },
+            { question: "cross-selling", answer: "Yes, it can suggest related products based on user interest." },
+            { question: "discount codes", answer: "Yes, it can offer coupons to users who are about to leave the site." },
+            { question: "refund policies", answer: "Yes, it can clearly state your terms and conditions." },
+            { question: "surveys", answer: "Yes, it can ask for feedback or ratings after a conversation." },
+            { question: "seo", answer: "Indirectly, yes, by increasing the time users spend on your website." },
+            { question: "negotiations", answer: "It can be programmed with specific logic for discounts or bulk pricing." },
+            { question: "pdf brochures", answer: "Yes, it can provide direct download links for files." },
+            { question: "real estate", answer: "Yes, by showing property listings and booking visits." },
+            { question: "restaurants", answer: "Yes, by showing menus and taking table reservations." },
+            { question: "healthcare", answer: "Yes, for booking consultations and answering general health FAQs." },
+            { question: "bounce rates", answer: "Yes, by engaging visitors immediately when they land on your page." },
+            { question: "hot lead", answer: "Yes, it can send an instant email/SMS when a high-value lead is chatting." },
+            { question: "compare products", answer: "Yes, it can list the differences between two items for the user." },
+            { question: "e-commerce", answer: "Yes, it integrates with platforms like Shopify and WooCommerce." },
+            { question: "complaints", answer: "Yes, it can log a complaint and provide a ticket number." },
+            // Category 3
+            { question: "ai models", answer: "I use GPT-4, Gemini Pro, or Claude depending on the use case." },
+            { question: "whatsapp", answer: "Yes, via the WhatsApp Business API." },
+            { question: "instagram", answer: "Yes, for automated DM management." },
+            { question: "secure", answer: "Yes, we use industry-standard encryption for all data handling." },
+            { question: "hosted", answer: "Usually on secure cloud servers like AWS, Google Cloud, or Azure." },
+            { question: "crm", answer: "Yes, it integrates with HubSpot, Salesforce, Zoho, etc." },
+            { question: "apis", answer: "Yes, it can fetch data from any external API." },
+            { question: "gdpr", answer: "Yes, we can set it up to respect user privacy laws." },
+            { question: "train", answer: "By uploading your website URL, PDFs, and text documents." },
+            { question: "location", answer: "Yes, to provide location-specific info like nearby stores." },
+            { question: "wordpress", answer: "Yes, it is compatible with all CMS platforms." },
+            { question: "webhooks", answer: "Yes, to trigger actions in other apps when a chat finishes." },
+            { question: "fast", answer: "Usually under 2 seconds." },
+            { question: "token usage", answer: "It refers to the amount of data processed by the AI model per chat." },
+            { question: "offline", answer: "No, it requires an internet connection to access the AI brain." },
+            { question: "white-labeled", answer: "Yes, there will be no branding except yours." },
+            { question: "voice-to-text", answer: "Yes, users can click a mic icon to speak." },
+            { question: "translate", answer: "Yes, if a user speaks in French, it can reply in French." },
+            { question: "chat history", answer: "Yes, an admin dashboard allows you to view all logs." },
+            { question: "turn it off", answer: "Yes, you have full control over its availability." },
+            // Category 4
+            { question: "color", answer: "Yes, we can change the bot's color to match your brand's theme." },
+            { question: "use my logo", answer: "Yes, the bot icon can be replaced with your brand logo." },
+            { question: "typing indicator", answer: "Yes, it shows 'Typing...' to make it feel more human." },
+            { question: "emojis", answer: "Yes, it uses emojis to keep the tone friendly." },
+            { question: "full-page chat", answer: "Yes, it can be full-page or a small bubble in the corner." },
+            { question: "proactively start", answer: "Yes, it can greet users after 5 seconds on the page." },
+            { question: "multiple-choice", answer: "Yes, we can add buttons for quick navigation." },
+            { question: "dark mode", answer: "Yes, it can switch based on user system preference." },
+            { question: "map", answer: "Yes, it can embed Google Maps links." },
+            { question: "verify otps", answer: "Yes, for secure account access or verification." },
+            { question: "popular questions", answer: "Yes, as Quick Reply buttons." },
+            { question: "accessible", answer: "Yes, it is fully compatible with screen readers." },
+            { question: "file uploads", answer: "Yes, users can upload images or PDFs for the bot to see." },
+            { question: "slow internet", answer: "Yes, it is optimized for low-bandwidth connections." },
+            { question: "triggered by buttons", answer: "Yes, clicking a 'Contact Us' button can open the bot." },
+            { question: "progress bar", answer: "Yes, for long processes like onboarding forms." },
+            { question: "custom fonts", answer: "Yes, to match your website typography." },
+            { question: "hidden", answer: "Yes, you can choose where it appears or hide it on certain pages." },
+            { question: "search bar", answer: "It acts like a smart search bar but in a conversational way." },
+            { question: "how-to steps", answer: "Yes, it provides clear, numbered instructions." },
+            // Category 5
+            { question: "sentiment analysis", answer: "The bot detects user mood and adjusts its tone accordingly." },
+            { question: "human handoff", answer: "Transferring the chat to a real person when the AI is stuck." },
+            { question: "hallucination", answer: "When AI makes up facts; I use grounding to prevent this." },
+            { question: "math problems", answer: "Yes, it has advanced reasoning capabilities for math." },
+            { question: "write code", answer: "Yes, it can assist with technical snippets." },
+            { question: "summarize", answer: "Yes, it can summarize long texts or articles." },
+            { question: "learn", answer: "It can be set to improve over time based on user feedback." },
+            { question: "ambiguous", answer: "It asks clarifying questions to understand you better." },
+            { question: "guardrails", answer: "Safety filters that prevent offensive content." },
+            { question: "execute logic", answer: "Yes, like calculating a loan EMI or shipping fee." },
+            { question: "external tools", answer: "Yes, through Function Calling (e.g., checking weather)." },
+            { question: "context aware", answer: "Yes, it remembers your name throughout the session." },
+            { question: "detect sarcasm", answer: "Advanced models are very good at identifying tone." },
+            { question: "citations", answer: "Yes, it can link to the source of information." },
+            { question: "generate images", answer: "Yes, if integrated with models like DALL-E." },
+            // Category 6
+            { question: "cost of setup", answer: "It depends on the complexity (Basic vs Advanced)." },
+            { question: "monthly fees", answer: "Yes, for AI model usage and maintenance." },
+            { question: "trial", answer: "Yes, I can set up a basic demo for your business." },
+            { question: "training period", answer: "Usually 24-48 hours for the AI to ingest all data." },
+            { question: "website content changes", answer: "The bot can be set to auto-sync with your site daily." },
+            { question: "technical support", answer: "Yes, I offer ongoing maintenance packages." },
+            { question: "dashboard", answer: "Yes, you get a dashboard to track leads and performance." },
+            { question: "multiple bots", answer: "Yes (e.g., Sales Bot and Support Bot)." },
+            { question: "get started", answer: "Just share your website URL and goals with me!" },
+            { question: "why choose your service", answer: "Because I provide custom, high-accuracy AI solutions." },
+            { question: "services", answer: "Joms offers Data Solutions, Python Automation, and AI integration services." },
+            { question: "contact", answer: "You can reach out via email at jomon13051983@gmail.com." },
+            { question: "price", answer: "Pricing depends on the project's complexity. Please contact Joms for a quote." }
+        ];
+
         function handleQuery(event) {
             if (event.key === "Enter") {
                 const inputField = document.getElementById('user-input');
@@ -71,8 +203,9 @@
 
                 if (!userQuery) return;
 
+                // Reset Display
                 displayArea.classList.remove('typing-text');
-                void displayArea.offsetWidth;
+                void displayArea.offsetWidth; 
                 displayArea.style.width = 'auto';
                 displayArea.style.borderRight = 'none';
 
@@ -85,19 +218,60 @@
                 }
 
                 // 2. Logic
-                let response = "I'm sorry, I don't have information on that.";
-                
-                if (window.botData) {
-                    const found = window.botData.find(item => {
-                        const dbQ = item.question.toLowerCase();
-                        return userQuery.includes(dbQ) || dbQ.includes(userQuery);
-                    });
-                    if (found) response = found.answer;
-                }
+                let response = "I'm sorry, I don't have information on that. Try 'services' or 'contact'.";
+                const found = botData.find(item => {
+                    const dbQ = item.question.toLowerCase();
+                    return userQuery.includes(dbQ) || dbQ.includes(userQuery);
+                });
+
+                if (found) response = found.answer;
 
                 displayArea.innerText = response;
                 inputField.value = "";
             }
+        }
+
+        function askQuick(query) {
+            document.getElementById('user-input').value = query;
+            handleQuery({ key: "Enter" });
+        }
+
+        function openHelpModal() {
+            document.getElementById('helpModal').classList.remove('hidden');
+            const container = document.getElementById('category-container');
+            container.innerHTML = ""; 
+
+            const categories = {
+                "General & Capabilities": botData.slice(0, 15),
+                "Business & Sales": botData.slice(15, 35),
+                "Technical & Integration": botData.slice(35, 55),
+                "UI & Customization": botData.slice(55, 75),
+                "Advanced AI & Logic": botData.slice(75, 90),
+                "Pricing & Support": botData.slice(90, 103)
+            };
+
+            for (let cat in categories) {
+                let details = document.createElement('details');
+                details.className = "group border border-white/5 rounded-2xl bg-white/5 overflow-hidden";
+                details.innerHTML = `
+                    <summary class="p-4 cursor-pointer font-semibold text-slate-300 hover:bg-white/10 flex justify-between items-center transition">
+                        ${cat} <span class="text-[10px] bg-white/10 px-2 py-1 rounded-md">${categories[cat].length}</span>
+                    </summary>
+                    <div class="p-4 pt-0 space-y-2 bg-slate-950/40">
+                        ${categories[cat].map(item => `
+                            <p onclick="askQuick('${item.question}'); closeHelpModal();" 
+                               class="text-xs text-slate-400 cursor-pointer hover:text-green-400 border-b border-white/5 pb-2 transition capitalize">
+                               • ${item.question}
+                            </p>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(details);
+            }
+        }
+
+        function closeHelpModal() {
+            document.getElementById('helpModal').classList.add('hidden');
         }
     </script>
 </body>
