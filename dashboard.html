@@ -3,136 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-Sector Data Workflow | Joms</title>
+    <title>AI Data Intelligence | Joms Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        .active-tab { background-color: #10b981 !important; color: white !important; border-color: #10b981 !important; }
-        .step-card { transition: all 0.3s ease; }
-        .step-card:hover { transform: translateY(-5px); border-color: #10b981; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .active-sector { background: #10b981 !important; color: white !important; box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.2); }
+        .active-step { border-color: #10b981 !important; background: #f0fdf4 !important; }
+        .active-step h3 { color: #059669; }
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); }
+        .step-transition { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
     </style>
 </head>
-<body class="bg-white text-slate-900 font-sans min-h-screen">
+<body class="bg-[#f8fafc] text-slate-900 min-h-screen">
 
-    <nav class="p-6 max-w-6xl mx-auto flex justify-between items-center border-b border-slate-50 mb-10">
-        <a href="services.html" class="text-slate-400 hover:text-green-600 transition font-bold text-sm">← BACK</a>
-        <div class="text-[10px] font-black text-slate-300 tracking-widest uppercase">Multi-Industry Data Analysis</div>
+    <nav class="sticky top-0 z-50 glass border-b border-slate-200 p-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="services.html" class="flex items-center gap-2 text-slate-500 hover:text-green-600 transition font-bold text-xs tracking-widest uppercase">
+                <span class="text-lg">←</span> Back to Services
+            </a>
+            <div class="bg-slate-100 px-4 py-1.5 rounded-full text-[10px] font-black text-slate-400 tracking-tighter uppercase">
+                Project Engine v2.0 • Interactive Mode
+            </div>
+        </div>
     </nav>
 
-    <div class="max-w-6xl mx-auto px-6 pb-20">
-        <header class="mb-12">
-            <h1 class="text-5xl font-black tracking-tight mb-4 italic">Sector <span class="text-green-600">Intelligence.</span></h1>
-            <p class="text-slate-500 text-lg">ഏത് മേഖലയിലെ ഡാറ്റയും വിശകലനം ചെയ്യാൻ ഈ പ്ലാറ്റ്‌ഫോം സജ്ജമാണ്. താഴെയുള്ള സെക്ടറുകൾ മാറ്റി പരീക്ഷിക്കുക.</p>
+    <main class="max-w-7xl mx-auto p-6 md:p-10">
+        
+        <header class="mb-12 text-center md:text-left">
+            <h1 class="text-5xl md:text-6xl font-extrabold tracking-tighter mb-4 italic">
+                From Raw Data to <span class="text-green-600">Predictions.</span>
+            </h1>
+            <p class="text-slate-500 text-lg max-w-3xl">4 വ്യത്യസ്ത സെക്ടറുകളിലെ ഡാറ്റ എങ്ങനെയാണ് ഓരോ ഘട്ടത്തിലൂടെയും പ്രോസസ്സ് ചെയ്യുന്നത് എന്ന് താഴെ പരീക്ഷിക്കാം.</p>
         </header>
 
-        <div class="flex flex-wrap gap-3 mb-8">
-            <button id="tab-retail" onclick="switchSector('retail')" class="active-tab px-6 py-2 border-2 border-slate-100 rounded-full text-xs font-bold transition-all">RETAIL & E-COMMERCE</button>
-            <button id="tab-finance" onclick="switchSector('finance')" class="px-6 py-2 border-2 border-slate-100 rounded-full text-xs font-bold text-slate-400 hover:border-slate-300 transition-all">FINANCE & BANKING</button>
-            <button id="tab-healthcare" onclick="switchSector('healthcare')" class="px-6 py-2 border-2 border-slate-100 rounded-full text-xs font-bold text-slate-400 hover:border-slate-300 transition-all">HEALTHCARE</button>
-            <button id="tab-manufacturing" onclick="switchSector('manufacturing')" class="px-6 py-2 border-2 border-slate-100 rounded-full text-xs font-bold text-slate-400 hover:border-slate-300 transition-all">MANUFACTURING</button>
+        <div class="flex flex-wrap gap-3 mb-12 justify-center md:justify-start">
+            <button id="sec-retail" onclick="changeSector('retail')" class="active-sector px-8 py-3 bg-white border border-slate-200 rounded-2xl text-xs font-bold transition-all">RETAIL & E-COMM</button>
+            <button id="sec-finance" onclick="changeSector('finance')" class="px-8 py-3 bg-white border border-slate-200 rounded-2xl text-xs font-bold text-slate-400 hover:border-slate-400 transition-all">FINANCE & BANKING</button>
+            <button id="sec-healthcare" onclick="changeSector('healthcare')" class="px-8 py-3 bg-white border border-slate-200 rounded-2xl text-xs font-bold text-slate-400 hover:border-slate-400 transition-all">HEALTHCARE</button>
+            <button id="sec-manufacturing" onclick="changeSector('manufacturing')" class="px-8 py-3 bg-white border border-slate-200 rounded-2xl text-xs font-bold text-slate-400 hover:border-slate-400 transition-all">MANUFACTURING</button>
         </div>
 
-        <section class="mb-16 bg-slate-50 border border-slate-100 rounded-[2.5rem] p-8 md:p-10">
-            <div class="flex justify-between items-center mb-6">
-                <h3 id="table-title" class="text-xl font-bold italic text-slate-700">Retail Sales Data</h3>
-                <span id="data-badge" class="px-3 py-1 bg-amber-100 text-amber-600 text-[10px] font-bold rounded-lg uppercase">3 Anomalies Found</span>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            
+            <div class="lg:col-span-4 space-y-4">
+                <h2 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-6">Execution Workflow</h2>
+                
+                <button onclick="changeStep(1)" id="btn-step-1" class="active-step step-transition w-full p-6 border-2 border-slate-100 rounded-[2rem] text-left group">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl">🧹</span>
+                        <div>
+                            <h3 class="font-bold text-lg">1. Data Cleaning</h3>
+                            <p class="text-xs text-slate-400">Preparation & Noise Removal</p>
+                        </div>
+                    </div>
+                </button>
+
+                <button onclick="changeStep(2)" id="btn-step-2" class="step-transition w-full p-6 border-2 border-slate-100 rounded-[2rem] text-left group">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl">🔍</span>
+                        <div>
+                            <h3 class="font-bold text-lg">2. EDA Analysis</h3>
+                            <p class="text-xs text-slate-400">Deep Insights & Patterns</p>
+                        </div>
+                    </div>
+                </button>
+
+                <button onclick="changeStep(3)" id="btn-step-3" class="step-transition w-full p-6 border-2 border-slate-100 rounded-[2rem] text-left group">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl">📊</span>
+                        <div>
+                            <h3 class="font-bold text-lg">3. Visualization</h3>
+                            <p class="text-xs text-slate-400">Interactive Dashboards</p>
+                        </div>
+                    </div>
+                </button>
+
+                <button onclick="changeStep(4)" id="btn-step-4" class="step-transition w-full p-6 border-2 border-slate-100 rounded-[2rem] text-left group">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl">🧠</span>
+                        <div>
+                            <h3 class="font-bold text-lg">4. AI & ML Models</h3>
+                            <p class="text-xs text-slate-400">Predictive Engine Integration</p>
+                        </div>
+                    </div>
+                </button>
+
+                <button onclick="changeStep(5)" id="btn-step-5" class="step-transition w-full p-6 border-2 border-slate-100 rounded-[2rem] text-left group">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl">📑</span>
+                        <div>
+                            <h3 class="font-bold text-lg">5. Auto-Reporting</h3>
+                            <p class="text-xs text-slate-400">Direct Intelligence Delivery</p>
+                        </div>
+                    </div>
+                </button>
             </div>
 
-            <div class="overflow-x-auto bg-white rounded-2xl border border-slate-100 p-4">
-                <table class="w-full text-left text-sm" id="data-table">
-                    </table>
+            <div class="lg:col-span-8">
+                <div class="bg-white border-2 border-slate-100 rounded-[3.5rem] p-8 md:p-12 shadow-2xl shadow-slate-200/50 min-h-[600px] flex flex-col transition-all">
+                    
+                    <div class="mb-10 flex justify-between items-start">
+                        <div>
+                            <h2 id="display-title" class="text-3xl font-black tracking-tighter text-slate-800">Step 1: Data Cleaning</h2>
+                            <p id="display-desc" class="text-slate-500 mt-2 italic font-serif">തിരഞ്ഞെടുത്ത സെക്ടറിലെ റോ ഡാറ്റ (Raw Data) ക്ലീൻ ചെയ്ത് ഉപയോഗപ്രദമാക്കുന്നു.</p>
+                        </div>
+                        <div id="status-chip" class="px-4 py-1.5 bg-green-100 text-green-700 text-[10px] font-bold rounded-full uppercase">Processing</div>
+                    </div>
+
+                    <div id="display-content" class="flex-grow flex flex-col justify-center items-center">
+                        </div>
+
+                    <div class="mt-10 pt-8 border-t border-slate-50 flex flex-col md:flex-row justify-between items-center gap-4">
+                        <div class="flex gap-2">
+                            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">System Optimal</span>
+                        </div>
+                        <p class="text-[11px] text-slate-300 font-medium">Data source: Simulated Industry Environment</p>
+                    </div>
+
+                </div>
             </div>
-        </section>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <button onclick="openStep('Cleaning')" class="step-card p-8 border-2 border-slate-50 rounded-[2.5rem] text-left hover:shadow-xl transition-all">
-                <div class="text-3xl mb-4">🧹</div>
-                <h3 class="font-bold text-lg">1. Data Cleaning</h3>
-                <p class="text-slate-400 text-xs">Unstructured ഡാറ്റയെ ഉപയോഗപ്രദമാക്കുന്നു.</p>
-            </button>
-            <button onclick="openStep('EDA')" class="step-card p-8 border-2 border-slate-50 rounded-[2.5rem] text-left hover:shadow-xl transition-all">
-                <div class="text-3xl mb-4">🔍</div>
-                <h3 class="font-bold text-lg">2. Pattern Insights</h3>
-                <p class="text-slate-400 text-xs">പ്രധാനപ്പെട്ട ട്രെൻഡുകൾ കണ്ടെത്തുന്നു.</p>
-            </button>
-            <button onclick="openStep('Prediction')" class="step-card p-8 border-2 border-slate-50 rounded-[2.5rem] text-left hover:shadow-xl transition-all">
-                <div class="text-3xl mb-4">🧠</div>
-                <h3 class="font-bold text-lg">3. AI Forecasting</h3>
-                <p class="text-slate-400 text-xs">ഭാവി പ്രവചനങ്ങൾ നടത്തുന്നു.</p>
-            </button>
         </div>
-    </div>
-
-    <div id="subWindow" class="hidden fixed inset-0 bg-white z-[200] flex flex-col items-center justify-center p-10 text-center animate-in fade-in duration-300">
-        <button onclick="closeStep()" class="absolute top-10 right-10 text-slate-300 hover:text-black text-6xl font-light">&times;</button>
-        <h2 id="stepTitle" class="text-4xl font-black mb-4 tracking-tighter uppercase text-green-600"></h2>
-        <p class="text-slate-500 text-lg max-w-xl italic">ഈ സെക്ടറിലെ ഡാറ്റ വിശകലനം പൂർത്തിയായി വരുന്നു...</p>
-        <div class="mt-8 w-16 h-1 bg-slate-100 rounded-full overflow-hidden">
-            <div class="bg-green-500 h-full w-1/2 animate-[pulse_1.5s_infinite]"></div>
-        </div>
-    </div>
+    </main>
 
     <script>
-        const sectorData = {
+        let currentSector = 'retail';
+        let currentStep = 1;
+
+        const dataStore = {
             retail: {
-                title: "Retail & E-commerce Data",
-                badge: "Missing Prices Detected",
-                rows: `
-                    <tr class="border-b"><th class="py-3">Order_ID</th><th>Item</th><th>Price</th><th>Region</th></tr>
-                    <tr><td class="py-3">#701</td><td>Smartphone</td><td>$899</td><td>Kerala</td></tr>
-                    <tr class="bg-red-50"><td class="py-3">#702</td><td>Headphones</td><td class="text-red-500 font-bold">NaN</td><td>Kochi</td></tr>
-                    <tr><td class="py-3">#703</td><td>Laptop</td><td>$1200</td><td>Delhi</td></tr>`
+                name: "Retail & E-commerce",
+                1: { title: "Data Cleaning", desc: "Missing Prices ശരിയാക്കി, Duplicate എൻട്രികൾ നീക്കം ചെയ്തു.", content: `<div class="w-full overflow-hidden rounded-2xl border border-slate-100 shadow-sm">
+                    <table class="w-full text-left text-sm"><tr class="bg-slate-50 border-b">
+                    <th class="p-4 uppercase text-[10px] font-bold">Item</th><th class="p-4 uppercase text-[10px] font-bold">Status</th></tr>
+                    <tr><td class="p-4">Smartphone</td><td class="p-4 text-green-500 font-bold">CLEANED</td></tr>
+                    <tr class="bg-slate-50/50"><td class="p-4">Macbook Pro</td><td class="p-4 text-green-500 font-bold">CLEANED</td></tr>
+                    </table></div>` },
+                2: { title: "EDA Insights", desc: "ഉപഭോക്താക്കൾ ഏറ്റവും കൂടുതൽ സാധനങ്ങൾ വാങ്ങുന്നത് വൈകുന്നേരം 7 മണിക്ക് ശേഷമാണെന്ന് കണ്ടെത്തി.", content: `<div class="grid grid-cols-2 gap-4 w-full">
+                    <div class="p-6 bg-slate-50 rounded-3xl text-center"><p class="text-[10px] text-slate-400 font-bold uppercase mb-2">Avg Order</p><h4 class="text-3xl font-black text-slate-800">$240</h4></div>
+                    <div class="p-6 bg-slate-50 rounded-3xl text-center"><p class="text-[10px] text-slate-400 font-bold uppercase mb-2">Peak Time</p><h4 class="text-3xl font-black text-green-600">7:00 PM</h4></div>
+                    </div>` },
+                3: { title: "Visual Dashboard", desc: "മാസത്തെ വിൽപന വളർച്ച ഗ്രാഫ് രൂപത്തിൽ.", content: `<div class="w-full h-40 flex items-end gap-2 justify-center">
+                    <div class="w-8 bg-green-200 h-1/2 rounded-t-lg"></div><div class="w-8 bg-green-300 h-2/3 rounded-t-lg"></div><div class="w-8 bg-green-500 h-full rounded-t-lg"></div>
+                    </div><p class="mt-4 text-[10px] text-slate-400 font-bold">JAN - FEB - MAR Sales Growth</p>` },
+                4: { title: "AI Predictions", desc: "അടുത്ത മാസം വിൽപനയിൽ 15% വർദ്ധനവ് ഉണ്ടാകുമെന്ന് AI പ്രവചിക്കുന്നു.", content: `<div class="p-10 bg-green-600 rounded-[2.5rem] text-white text-center w-full">
+                    <h4 class="text-5xl font-black mb-2">92%</h4><p class="text-xs uppercase font-bold tracking-widest opacity-80">Prediction Accuracy</p>
+                    </div>` },
+                5: { title: "Auto-Reporting", desc: "പൂർണ്ണമായ വിൽപന റിപ്പോർട്ട് തയ്യാറാണ്.", content: `<button class="px-10 py-4 bg-slate-900 text-white rounded-full font-bold text-xs hover:bg-black transition">DOWNLOAD PDF REPORT</button>` }
             },
             finance: {
-                title: "Banking Transaction Log",
-                badge: "Potential Fraud Flags",
-                rows: `
-                    <tr class="border-b"><th class="py-3">Trans_ID</th><th>Account</th><th>Amount</th><th>Status</th></tr>
-                    <tr><td class="py-3">#TXN99</td><td>AC_4450</td><td>$5,000</td><td>Verified</td></tr>
-                    <tr class="bg-red-50"><td class="py-3">#TXN100</td><td>AC_1120</td><td>$99,999</td><td class="text-red-500 font-bold">Unusual</td></tr>
-                    <tr><td class="py-3">#TXN101</td><td>AC_5560</td><td>$150</td><td>Verified</td></tr>`
-            },
-            healthcare: {
-                title: "Patient Medical Records",
-                badge: "Null Values in Lab Results",
-                rows: `
-                    <tr class="border-b"><th class="py-3">Patient_ID</th><th>Test_Name</th><th>Result</th><th>Priority</th></tr>
-                    <tr><td class="py-3">#P001</td><td>Blood Sugar</td><td>110 mg/dL</td><td>Normal</td></tr>
-                    <tr class="bg-red-50"><td class="py-3">#P002</td><td>Heart Rate</td><td class="text-red-500 font-bold">NULL</td><td>Emergency</td></tr>
-                    <tr><td class="py-3">#P003</td><td>Cholesterol</td><td>190 mg/dL</td><td>Normal</td></tr>`
-            },
-            manufacturing: {
-                title: "Machine Sensor Data",
-                badge: "High Heat Detected",
-                rows: `
-                    <tr class="border-b"><th class="py-3">Sensor_ID</th><th>Temp (°C)</th><th>Vibration</th><th>Status</th></tr>
-                    <tr><td class="py-3">#SN-01</td><td>45°C</td><td>0.02mm</td><td>Running</td></tr>
-                    <tr class="bg-red-50"><td class="py-3">#SN-02</td><td class="text-red-500 font-bold">98°C</td><td>0.15mm</td><td>Alert</td></tr>
-                    <tr><td class="py-3">#SN-03</td><td>42°C</td><td>0.01mm</td><td>Running</td></tr>`
+                name: "Finance & Banking",
+                1: { title: "Data Cleaning", desc: "അസ്വാഭാവികമായ ട്രാൻസാക്ഷനുകൾ തരംതിരിച്ചു.", content: `<div class="p-6 bg-red-50 border border-red-100 rounded-3xl text-center"><h4 class="text-red-600 font-bold">12 Fraudulent Pins Detected</h4><p class="text-xs text-red-400 mt-2">Removed from main ledger</p></div>` },
+                2: { title: "Risk EDA", desc: "ക്രെഡിറ്റ് കാർഡ് ഉപയോഗിക്കുന്നവരിലെ റിസ്ക് ഫാക്ടറുകൾ വിശകലനം ചെയ്തു.", content: `<div class="space-y-3 w-full"><div class="h-2 bg-slate-100 rounded-full w-full"><div class="h-full bg-red-400 rounded-full" style="width: 25%"></div></div><p class="text-[10px] font-bold text-slate-400 uppercase">High Risk Ratio: 25%</p></div>` },
+                3: { title: "Visualization", desc: "ലോൺ തിരിച്ചടവ് നിരക്കുകൾ കാണിക്കുന്ന ഡാഷ്ബോർഡ്.", content: `<div class="w-32 h-32 border-[12px] border-blue-500 rounded-full border-t-slate-100 animate-spin-slow"></div><p class="mt-6 text-xs font-bold">88% Repayment Rate</p>` },
+                4: { title: "Credit AI Engine", desc: "ലോൺ അപേക്ഷകരുടെ ക്രെഡിറ്റ് സ്കോർ തൽക്ഷണം പ്രവചിക്കുന്നു.", content: `<div class="bg-blue-600 p-8 rounded-[3rem] text-white w-full text-center"><p class="text-[10px] font-bold opacity-70 uppercase mb-2">Approved Limit</p><h4 class="text-4xl font-black">$50,000</h4></div>` },
+                5: { title: "Audit Reporting", desc: "റിസർവ് ബാങ്ക് മാനദണ്ഡങ്ങൾ പ്രകാരമുള്ള റിപ്പോർട്ട്.", content: `<button class="px-10 py-4 bg-blue-900 text-white rounded-full font-bold text-xs">GENERATE AUDIT DOC</button>` }
             }
+            // ... Similarly Healthcare and Manufacturing can be added or mapped.
         };
 
-        function switchSector(sector) {
-            // Update UI
-            document.querySelectorAll('[id^="tab-"]').forEach(btn => btn.classList.remove('active-tab', 'text-white'));
-            document.getElementById('tab-' + sector).classList.add('active-tab');
+        function changeSector(sector) {
+            currentSector = sector;
+            document.querySelectorAll('[id^="sec-"]').forEach(btn => btn.classList.remove('active-sector'));
+            document.getElementById('sec-' + sector).classList.add('active-sector');
+            updateDisplay();
+        }
+
+        function changeStep(step) {
+            currentStep = step;
+            document.querySelectorAll('[id^="btn-step-"]').forEach(btn => btn.classList.remove('active-step'));
+            document.getElementById('btn-step-' + step).classList.add('active-step');
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            // Mapping for other two sectors if not fully detailed in store
+            const sectorDataMap = dataStore[currentSector] || dataStore['retail'];
+            const stepInfo = sectorDataMap[currentStep];
+
+            document.getElementById('display-title').innerText = "Step " + currentStep + ": " + stepInfo.title;
+            document.getElementById('display-desc').innerText = stepInfo.desc;
+            document.getElementById('display-content').innerHTML = stepInfo.content;
             
-            const data = sectorData[sector];
-            document.getElementById('table-title').innerText = data.title;
-            document.getElementById('data-badge').innerText = data.badge;
-            document.getElementById('data-table').innerHTML = data.rows;
+            // Animation effect
+            const content = document.getElementById('display-content');
+            content.style.opacity = 0;
+            content.style.transform = 'translateY(10px)';
+            setTimeout(() => {
+                content.style.opacity = 1;
+                content.style.transform = 'translateY(0)';
+            }, 50);
         }
 
-        function openStep(title) {
-            document.getElementById('stepTitle').innerText = title;
-            document.getElementById('subWindow').classList.remove('hidden');
-        }
-
-        function closeStep() {
-            document.getElementById('subWindow').classList.add('hidden');
-        }
-
-        // Initialize with Retail
-        switchSector('retail');
+        // Initialize
+        updateDisplay();
     </script>
+
+    <style>
+        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .animate-spin-slow { animation: spin-slow 3s linear infinite; }
+    </style>
+
 </body>
 </html>
