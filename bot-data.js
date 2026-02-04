@@ -1,20 +1,6 @@
-<head>
-    </head>
-<body>
-    <script src="bot-data.js"></script>
-    <script>
-        window.onload = function() {
-            if (typeof botData !== 'undefined') {
-                console.log("Success: Data loaded!");
-            } else {
-                console.error("Error: bot-data.js is still not found!");
-            }
-        };
-  
-
 // bot-data.js
 const botQA = [
-    // --- Category 1: General & Capabilities (1-15) ---
+    // --- Category 1: General & Capabilities ---
     { question: "what is an ai customer assistant", answer: "An AI assistant is a smart chatbot that uses Natural Language Processing to interact with users like a human." },
     { question: "different from a standard chatbot", answer: "Yes. Standard bots follow a rigid script; this AI understands intent and handles conversational context." },
     { question: "24/7", answer: "Yes, it provides round-the-clock support without breaks or delays." },
@@ -31,7 +17,7 @@ const botQA = [
     { question: "limit", answer: "No, it can be trained on thousands of pages of information." },
     { question: "jokes", answer: "Yes, we can enable 'Small Talk' to make the bot more engaging." },
 
-    // --- Category 2: Business & Sales (16-35) ---
+    // --- Category 2: Business & Sales ---
     { question: "book appointments", answer: "Yes, it integrates with Google Calendar or Calendly to schedule meetings." },
     { question: "generate leads", answer: "Yes, it captures names, emails, and phone numbers during the chat." },
     { question: "take orders", answer: "Yes, it can guide users through a product catalog and take order details." },
@@ -53,7 +39,7 @@ const botQA = [
     { question: "e-commerce", answer: "Yes, it integrates with platforms like Shopify and WooCommerce." },
     { question: "complaints", answer: "Yes, it can log a complaint and provide a ticket number." },
 
-    // --- Category 3: Technical & Integration (36-55) ---
+    // --- Category 3: Technical & Integration ---
     { question: "ai models", answer: "I use GPT-4, Gemini Pro, or Claude depending on the use case." },
     { question: "whatsapp", answer: "Yes, via the WhatsApp Business API." },
     { question: "instagram", answer: "Yes, for automated DM management." },
@@ -63,72 +49,68 @@ const botQA = [
     { question: "apis", answer: "Yes, it can fetch data from any external API." },
     { question: "gdpr", answer: "Yes, we can set it up to respect user privacy laws." },
     { question: "train", answer: "By uploading your website URL, PDFs, and text documents." },
-    { question: "location", answer: "Yes, to provide location-specific info (like nearby stores)." },
+    { question: "location", answer: "Yes, to provide location-specific info." },
     { question: "wordpress", answer: "Yes, it is compatible with all CMS platforms." },
-    { question: "webhooks", answer: "Yes, to trigger actions in other apps when a chat finishes." },
+    { question: "webhooks", answer: "Yes, to trigger actions in other apps." },
     { question: "fast", answer: "Usually under 2 seconds." },
-    { question: "token usage", answer: "It refers to the amount of data processed by the AI model per chat." },
-    { question: "offline", answer: "No, it requires an internet connection to access the AI brain." },
+    { question: "token usage", answer: "It refers to the amount of data processed by the AI model." },
+    { question: "offline", answer: "No, it requires an internet connection." },
     { question: "white-labeled", answer: "Yes, there will be no branding except yours." },
     { question: "voice-to-text", answer: "Yes, users can click a mic icon to speak." },
-    { question: "translate", answer: "Yes, if a user speaks in another language, it can reply in the same." },
+    { question: "translate", answer: "Yes, it can translate in real-time." },
     { question: "chat history", answer: "Yes, an admin dashboard allows you to view all logs." },
     { question: "turn it off", answer: "Yes, you have full control over its availability." },
 
-    // --- Category 4: UI, Customization & UX (56-75) ---
-    { question: "color", answer: "Yes, the bot's color can be changed to match your brand's theme." },
-    { question: "logo", answer: "Yes, the bot icon can be your brand logo." },
-    { question: "typing", answer: "Yes, it shows a 'Typing...' indicator to make it feel more human." },
+    // --- Category 4: UI & UX ---
+    { question: "color", answer: "Yes, to match your brand's theme." },
+    { question: "use my logo", answer: "Yes, the bot icon can be your brand logo." },
+    { question: "typing", answer: "Yes, it shows 'Typing...' to feel more human." },
     { question: "emojis", answer: "Yes, it uses emojis to keep the tone friendly." },
-    { question: "full-page chat", answer: "Yes, it can be a full-page interface or a small bubble in the corner." },
-    { question: "proactively start", answer: "Yes, it can greet a user after they spend a few seconds on the page." },
-    { question: "multiple-choice", answer: "Yes, it can provide options for quick navigation." },
-    { question: "dark mode", answer: "Yes, it can switch between light and dark modes based on user preference." },
-    { question: "map", answer: "Yes, it can embed Google Maps links for locations." },
-    { question: "verify otps", answer: "Yes, for secure account access or verification." },
-    { question: "popular questions", answer: "Yes, it can suggest common queries as 'Quick Reply' buttons." },
-    { question: "accessible", answer: "Yes, it is compatible with screen readers for the disabled." },
-    { question: "file uploads", answer: "Yes, users can upload images or PDFs for the bot to analyze." },
-    { question: "slow internet", answer: "Yes, it is optimized for low-bandwidth connections." },
-    { question: "specific buttons", answer: "Yes, clicking a button like 'Contact Us' can trigger the bot." },
-    { question: "progress bar", answer: "Yes, for processes like onboarding or form filling." },
-    { question: "custom fonts", answer: "Yes, to match your website typography." },
-    { question: "hidden", answer: "Yes, you can choose specific pages where the bot should not appear." },
-    { question: "search bar", answer: "It acts like a search bar, but provides conversational results." },
-    { question: "how-to steps", answer: "Yes, it provides clear, numbered instructions for tasks." },
+    { question: "full-page chat", answer: "Yes, or a small bubble in the corner." },
+    { question: "proactively start", answer: "Yes, it can greet users after a set time." },
+    { question: "multiple-choice", answer: "Yes, for quick navigation." },
+    { question: "dark mode", answer: "Yes, it can switch based on preference." },
+    { question: "map", answer: "Yes, it can embed Google Maps links." },
+    { question: "verify otps", answer: "Yes, for secure access." },
+    { question: "popular questions", answer: "Yes, as Quick Reply buttons." },
+    { question: "accessible", answer: "Yes, it is compatible with screen readers." },
+    { question: "file uploads", answer: "Yes, users can upload images or PDFs." },
+    { question: "slow internet", answer: "Yes, it is optimized for low-bandwidth." },
+    { question: "triggered by buttons", answer: "Yes, specific buttons can open the bot." },
+    { question: "progress bar", answer: "Yes, for long onboarding processes." },
+    { question: "custom fonts", answer: "Yes, to match your typography." },
+    { question: "hidden", answer: "Yes, you choose where it appears." },
+    { question: "search bar", answer: "It acts like a search, but is more conversational." },
+    { question: "how-to steps", answer: "Yes, it provides clear instructions." },
 
-    // --- Category 5: Advanced AI & Logic (76-90) ---
-    { question: "sentiment analysis", answer: "The bot detects user emotions and adjusts its tone accordingly." },
-    { question: "human handoff", answer: "It can transfer the chat to a real person when the AI is stuck." },
-    { question: "hallucination", answer: "That's when AI makes up facts; I use 'Grounding' to prevent this." },
-    { question: "math problems", answer: "Yes, it has advanced reasoning capabilities for calculations." },
-    { question: "write code", answer: "Yes, it can assist with technical snippets and programming." },
-    { question: "summarize", answer: "Yes, it can summarize long articles or text pasted by the user." },
-    { question: "learn", answer: "It can be set to improve over time based on user feedback." },
-    { question: "ambiguous", answer: "It asks clarifying questions to understand the user better." },
-    { question: "guardrails", answer: "Safety filters that prevent the bot from saying anything offensive." },
-    { question: "execute logic", answer: "Yes, like calculating a loan EMI or a shipping fee." },
-    { question: "external tools", answer: "Yes, through 'Function Calling' (e.g., checking weather)." },
-    { question: "context aware", answer: "Yes, it remembers the user's name and previous points throughout the chat." },
-    { question: "sarcasm", answer: "Advanced AI models are very good at identifying sarcastic tones." },
-    { question: "citations", answer: "Yes, it can link to the source of the info, like a specific manual page." },
-    { question: "generate images", answer: "Yes, if integrated with models like DALL-E or Midjourney." },
+    // --- Category 5: Advanced AI ---
+    { question: "sentiment analysis", answer: "The bot detects user mood and changes its tone." },
+    { question: "human handoff", answer: "Transferring the chat to a real person when needed." },
+    { question: "hallucination", answer: "When AI makes up facts; I use grounding to prevent this." },
+    { question: "math problems", answer: "Yes, it has advanced reasoning capabilities." },
+    { question: "write code", answer: "Yes, it can assist with technical snippets." },
+    { question: "summarize", answer: "Yes, it can summarize long texts." },
+    { question: "learn", answer: "It can be set to improve over time based on feedback." },
+    { question: "ambiguous", answer: "It asks clarifying questions to understand better." },
+    { question: "guardrails", answer: "Safety filters to prevent offensive content." },
+    { question: "execute logic", answer: "Yes, like calculating a loan EMI." },
+    { question: "external tools", answer: "Yes, through Function Calling." },
+    { question: "context aware", answer: "Yes, it remembers the user's name during the chat." },
+    { question: "detect sarcasm", answer: "Advanced models are good at identifying tone." },
+    { question: "citations", answer: "Yes, it can link to the source of information." },
+    { question: "generate images", answer: "Yes, if integrated with image models." },
 
-    // --- Category 6: Pricing, Support & Future (91-100) ---
-    { question: "cost", answer: "It depends on the complexity (Basic vs Advanced). Contact Joms for details." },
-    { question: "monthly fees", answer: "Yes, for AI model usage, hosting, and maintenance." },
+    // --- Category 6: Pricing & Future ---
+    { question: "cost of setup", answer: "It depends on complexity (Basic vs Advanced)." },
+    { question: "monthly fees", answer: "Yes, for AI model usage and maintenance." },
     { question: "trial", answer: "Yes, I can set up a basic demo for your business." },
-    { question: "training period", answer: "Usually 24-48 hours for the AI to ingest all your data." },
-    { question: "content changes", answer: "The bot can be set to auto-sync with your site daily." },
+    { question: "training period", answer: "Usually 24-48 hours for data ingestion." },
+    { question: "website content changes", answer: "The bot can auto-sync with your site daily." },
     { question: "technical support", answer: "Yes, I offer ongoing maintenance packages." },
-    { question: "dashboard", answer: "Yes, you get a dashboard to track leads and performance." },
-    { question: "multiple bots", answer: "Yes, you can have separate bots for Sales and Support." },
-    { question: "get started", answer: "Just share your website URL and goals with me to begin!" },
-    { question: "why choose you", answer: "I provide custom-tailored, high-accuracy AI solutions that drive real ROI." }
+    { question: "dashboard", answer: "Yes, to track leads and performance." },
+    { question: "multiple bots", answer: "Yes, like separate Sales and Support bots." },
+    { question: "get started", answer: "Just share your website URL and goals with me!" },
+    { question: "why choose your service", answer: "I provide custom-tailored, high-accuracy AI solutions." }
 ];
 
-// Making data available to ai-assistant.html
 window.botData = botQA;
-
-  </script>
-</body>
