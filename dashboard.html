@@ -8,174 +8,93 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
-        .active-sector { background: #10b981 !important; color: white !important; box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.2); }
+        .active-sector { background: #10b981 !important; color: white !important; }
         .active-step { border-color: #10b981 !important; background: #f0fdf4 !important; }
         .active-step h3 { color: #059669; }
         .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); }
-        .step-transition { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        /* പ്ലാറ്റ്‌ഫോമിനുള്ളിൽ കണ്ടന്റ് സ്ക്രോൾ ചെയ്യാൻ */
-        .content-scroll { max-height: 70vh; overflow-y: auto; }
     </style>
 </head>
-<body class="bg-[#f8fafc] text-slate-900 min-h-screen flex flex-col">
+<body class="bg-[#f8fafc] text-slate-900 min-h-screen">
 
     <nav class="sticky top-0 z-50 glass border-b border-slate-200 p-4">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="services.html" class="flex items-center gap-2 text-slate-500 hover:text-green-600 transition font-bold text-xs tracking-widest uppercase">
-                <span class="text-lg">←</span> Back to Services
-            </a>
-            <div class="bg-slate-100 px-4 py-1.5 rounded-full text-[10px] font-black text-slate-400 tracking-tighter uppercase">
-                Project Engine v2.0 • Interactive Mode
-            </div>
+            <a href="services.html" class="text-slate-500 font-bold text-xs tracking-widest uppercase">← Back</a>
+            <div class="bg-slate-100 px-4 py-1.5 rounded-full text-[10px] font-black text-slate-400">PROJECT ENGINE v2.0</div>
         </div>
     </nav>
 
-    <main class="flex-grow max-w-7xl mx-auto p-4 md:p-10 w-full">
-        
-        <header class="mb-10 text-center md:text-left">
-            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tighter mb-4 italic">
-                From Raw Data to <span class="text-green-600">Predictions.</span>
-            </h1>
-            <p class="text-slate-500 text-sm md:text-lg max-w-3xl">4 വ്യത്യസ്ത സെക്ടറുകളിലെ ഡാറ്റാ പ്രോസസ്സിംഗ് ഘട്ടങ്ങൾ പരീക്ഷിക്കാം.</p>
-        </header>
-
-        <div class="flex overflow-x-auto gap-3 mb-10 pb-2 no-scrollbar justify-start">
-            <button id="sec-retail" onclick="changeSector('retail_ecommerce')" class="active-sector whitespace-nowrap px-6 py-3 bg-white border border-slate-200 rounded-2xl text-[10px] font-bold transition-all">RETAIL & E-COMM</button>
-            <button id="sec-finance" onclick="changeSector('finance_banking')" class="whitespace-nowrap px-6 py-3 bg-white border border-slate-200 rounded-2xl text-[10px] font-bold text-slate-400 hover:border-slate-400 transition-all">FINANCE & BANKING</button>
-            <button id="sec-healthcare" onclick="changeSector('healthcare')" class="whitespace-nowrap px-6 py-3 bg-white border border-slate-200 rounded-2xl text-[10px] font-bold text-slate-400 hover:border-slate-400 transition-all">HEALTHCARE</button>
-            <button id="sec-manufacturing" onclick="changeSector('manufacturing')" class="whitespace-nowrap px-6 py-3 bg-white border border-slate-200 rounded-2xl text-[10px] font-bold text-slate-400 hover:border-slate-400 transition-all">MANUFACTURING</button>
+    <main class="max-w-7xl mx-auto p-6 md:p-10">
+        <div class="flex overflow-x-auto gap-3 mb-12 no-scrollbar">
+            <button onclick="changeSector('retail_ecommerce')" id="sec-retail" class="active-sector px-8 py-3 bg-white border border-slate-200 rounded-2xl text-[10px] font-bold">RETAIL & E-COMM</button>
+            <button onclick="changeSector('finance_banking')" id="sec-finance" class="px-8 py-3 bg-white border border-slate-200 rounded-2xl text-[10px] font-bold text-slate-400">FINANCE & BANKING</button>
+            <button onclick="changeSector('healthcare')" id="sec-health" class="px-8 py-3 bg-white border border-slate-200 rounded-2xl text-[10px] font-bold text-slate-400">HEALTHCARE</button>
+            <button onclick="changeSector('manufacturing')" id="sec-manu" class="px-8 py-3 bg-white border border-slate-200 rounded-2xl text-[10px] font-bold text-slate-400">MANUFACTURING</button>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            
-            <div class="lg:col-span-4 space-y-3 order-2 lg:order-1">
-                <h2 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Execution Workflow</h2>
-                
-                <button onclick="changeStep(1, 'data_cleaning.py')" id="btn-step-1" class="active-step step-transition w-full p-5 border-2 border-slate-100 rounded-[1.5rem] text-left group">
-                    <div class="flex items-center gap-4">
-                        <span class="text-xl">🧹</span>
-                        <div>
-                            <h3 class="font-bold text-sm">1. Data Cleaning</h3>
-                            <p class="text-[10px] text-slate-400">Preparation & Noise Removal</p>
-                        </div>
-                    </div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <div class="lg:col-span-4 space-y-4">
+                <button onclick="updateDisplay('data_cleaning.html', 1)" id="btn-1" class="active-step w-full p-6 border-2 border-slate-100 rounded-[2rem] text-left transition-all">
+                    <h3 class="font-bold">1. Data Cleaning</h3>
                 </button>
-
-                <button onclick="changeStep(2, 'eda_analysis.py')" id="btn-step-2" class="step-transition w-full p-5 border-2 border-slate-100 rounded-[1.5rem] text-left group">
-                    <div class="flex items-center gap-4">
-                        <span class="text-xl">🔍</span>
-                        <div>
-                            <h3 class="font-bold text-sm">2. EDA Analysis</h3>
-                            <p class="text-[10px] text-slate-400">Deep Insights & Patterns</p>
-                        </div>
-                    </div>
+                <button onclick="updateDisplay('eda_analysis.html', 2)" id="btn-2" class="w-full p-6 border-2 border-slate-100 rounded-[2rem] text-left transition-all">
+                    <h3 class="font-bold text-slate-400">2. EDA Analysis</h3>
                 </button>
-
-                <button onclick="changeStep(3, 'visualization.py')" id="btn-step-3" class="step-transition w-full p-5 border-2 border-slate-100 rounded-[1.5rem] text-left group">
-                    <div class="flex items-center gap-4">
-                        <span class="text-xl">📊</span>
-                        <div>
-                            <h3 class="font-bold text-sm">3. Visualization</h3>
-                            <p class="text-[10px] text-slate-400">Interactive Dashboards</p>
-                        </div>
-                    </div>
+                <button onclick="updateDisplay('visualization.html', 3)" id="btn-3" class="w-full p-6 border-2 border-slate-100 rounded-[2rem] text-left transition-all">
+                    <h3 class="font-bold text-slate-400">3. Visualization</h3>
                 </button>
-
-                <button onclick="changeStep(4, 'ai_ml_models.py')" id="btn-step-4" class="step-transition w-full p-5 border-2 border-slate-100 rounded-[1.5rem] text-left group">
-                    <div class="flex items-center gap-4">
-                        <span class="text-xl">🧠</span>
-                        <div>
-                            <h3 class="font-bold text-sm">4. AI & ML Models</h3>
-                            <p class="text-[10px] text-slate-400">Predictive Engine Integration</p>
-                        </div>
-                    </div>
+                <button onclick="updateDisplay('ai_ml_models.html', 4)" id="btn-4" class="w-full p-6 border-2 border-slate-100 rounded-[2rem] text-left transition-all">
+                    <h3 class="font-bold text-slate-400">4. AI & ML Models</h3>
                 </button>
-
-                <button onclick="changeStep(5, 'auto_reporting.py')" id="btn-step-5" class="step-transition w-full p-5 border-2 border-slate-100 rounded-[1.5rem] text-left group">
-                    <div class="flex items-center gap-4">
-                        <span class="text-xl">📑</span>
-                        <div>
-                            <h3 class="font-bold text-sm">5. Auto-Reporting</h3>
-                            <p class="text-[10px] text-slate-400">Direct Intelligence Delivery</p>
-                        </div>
-                    </div>
+                <button onclick="updateDisplay('auto_reporting.html', 5)" id="btn-5" class="w-full p-6 border-2 border-slate-100 rounded-[2rem] text-left transition-all">
+                    <h3 class="font-bold text-slate-400">5. Auto Reporting</h3>
                 </button>
             </div>
 
-            <div class="lg:col-span-8 order-1 lg:order-2">
-                <div class="bg-white border-2 border-slate-100 rounded-[2.5rem] p-6 md:p-10 shadow-xl shadow-slate-200/50 min-h-[500px] flex flex-col">
-                    
-                    <div class="mb-8 flex justify-between items-start">
-                        <div>
-                            <h2 id="display-title" class="text-2xl font-black tracking-tighter text-slate-800 uppercase">Loading Sector...</h2>
-                            <p id="display-desc" class="text-slate-400 text-xs mt-1 italic">Initializing connection to remote project files.</p>
-                        </div>
-                        <div class="px-3 py-1 bg-green-50 text-green-600 text-[10px] font-bold rounded-lg border border-green-100">STABLE</div>
-                    </div>
-
-                    <div id="display-content" class="flex-grow flex flex-col justify-center items-center content-scroll">
-                        </div>
-
-                    <div class="mt-8 pt-6 border-t border-slate-50 flex justify-between items-center">
-                        <div class="flex items-center gap-2">
-                            <span class="relative flex h-2 w-2">
-                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                            </span>
-                            <span class="text-[10px] font-bold text-slate-300 uppercase tracking-widest">System Optimal</span>
-                        </div>
-                    </div>
+            <div class="lg:col-span-8">
+                <div class="bg-white border-2 border-slate-100 rounded-[3rem] p-10 shadow-xl min-h-[500px]" id="display-content">
+                    <p class="text-slate-400">Select a step to view intelligence...</p>
                 </div>
             </div>
-
         </div>
     </main>
 
     <script>
         let currentSector = 'retail_ecommerce';
-        let currentFile = 'data_cleaning.py';
 
-        async function loadProjectData(sector, file) {
+        async function updateDisplay(fileName, btnId) {
             const contentArea = document.getElementById('display-content');
-            contentArea.innerHTML = `
-                <div class="flex flex-col items-center gap-4">
-                    <div class="w-8 h-8 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
-                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">Syncing with GitHub Workspace...</p>
-                </div>`;
             
+            // UI Update for Buttons
+            document.querySelectorAll('[id^="btn-"]').forEach(b => {
+                b.classList.remove('active-step');
+                b.querySelector('h3').classList.add('text-slate-400');
+            });
+            document.getElementById('btn-'+btnId).classList.add('active-step');
+            document.getElementById('btn-'+btnId).querySelector('h3').classList.remove('text-slate-400');
+
+            contentArea.innerHTML = "<p class='animate-pulse text-green-500 font-bold'>Syncing Data...</p>";
+
             try {
-                // കണക്ട് ചെയ്യേണ്ട പാത്ത്: data_projects/sector_folder/file_name
-                const response = await fetch(`data_projects/${sector}/${file}`);
-                if (!response.ok) throw new Error('File not found');
+                // Fetching from your server path
+                const url = `https://joms-sdg.in/data_projects/${currentSector}/${fileName}`;
+                const response = await fetch(url);
+                if(!response.ok) throw new Error();
                 const data = await response.text();
-                
                 contentArea.innerHTML = data;
-                document.getElementById('display-title').innerText = file.replace('.py', '').replace('_', ' ');
-                document.getElementById('display-desc').innerText = `Displaying real-time intelligence for ${sector.replace('_', ' ')} sector.`;
-            } catch (error) {
-                contentArea.innerHTML = `
-                <div class="text-center">
-                    <div class="text-4xl mb-4">📂</div>
-                    <p class="text-slate-400 text-sm italic font-medium">ഫയൽ ഇപ്പോൾ ലഭ്യമല്ല. <br> <span class="text-[10px] font-mono">path: data_projects/${sector}/${file}</span></p>
-                </div>`;
+            } catch (e) {
+                contentArea.innerHTML = `<div class='text-center p-10'><p class='text-red-500 font-bold'>Error 404: File Not Found</p><p class='text-xs text-slate-400 mt-2'>Path: data_projects/${currentSector}/${fileName}</p></div>`;
             }
         }
 
         function changeSector(sector) {
             currentSector = sector;
-            document.querySelectorAll('[id^="sec-"]').forEach(btn => btn.classList.remove('active-sector'));
-            event.currentTarget.classList.add('active-sector');
-            loadProjectData(currentSector, currentFile);
+            document.querySelectorAll('[onclick^="changeSector"]').forEach(b => b.classList.remove('active-sector'));
+            event.target.classList.add('active-sector');
+            updateDisplay('data_cleaning.html', 1);
         }
 
-        function changeStep(stepNumber, fileName) {
-            currentFile = fileName;
-            document.querySelectorAll('[id^="btn-step-"]').forEach(btn => btn.classList.remove('active-step'));
-            document.getElementById(`btn-step-${stepNumber}`).classList.add('active-step');
-            loadProjectData(currentSector, currentFile);
-        }
-
-        window.onload = () => loadProjectData('retail_ecommerce', 'data_cleaning.py');
+        // Default Load
+        window.onload = () => updateDisplay('data_cleaning.html', 1);
     </script>
 </body>
 </html>
