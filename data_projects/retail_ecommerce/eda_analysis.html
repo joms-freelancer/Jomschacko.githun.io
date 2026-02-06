@@ -1,23 +1,62 @@
-<div class="w-full p-6 space-y-6">
-    <div class="bg-white border-2 border-slate-100 rounded-[2rem] p-8 shadow-sm">
-        <h2 class="text-2xl font-black text-slate-800 mb-4">EDA ANALYSIS REPORT</h2>
-        <hr class="mb-6">
+<div class="w-full space-y-6 animate-in fade-in duration-700">
+    
+    <div class="border-b border-slate-100 pb-4 mb-6">
+        <h2 class="text-2xl font-black text-slate-800 tracking-tighter uppercase">Exploratory Data Analysis (EDA)</h2>
+        <p class="text-xs text-slate-400 italic">Detailed business discovery and pattern recognition report.</p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4">
         
-        <div class="grid grid-cols-2 gap-4 mb-8">
-            <div class="p-4 bg-blue-50 rounded-2xl">
-                <p class="text-[10px] font-bold text-blue-400 uppercase">Rows Analyzed</p>
-                <p class="text-xl font-black">12,450</p>
-            </div>
-            <div class="p-4 bg-green-50 rounded-2xl">
-                <p class="text-[10px] font-bold text-green-400 uppercase">Insights Found</p>
-                <p class="text-xl font-black">8 Key Trends</p>
-            </div>
+        <div class="bg-white p-6 rounded-[1.5rem] border border-slate-100 shadow-sm">
+            <h4 class="text-xs font-black text-blue-600 uppercase mb-3 flex items-center gap-2"><span>📊</span> 1. Data Overview</h4>
+            <p class="text-[13px] text-slate-600 leading-relaxed">
+                വിശകലനം ചെയ്ത ഡാറ്റയിൽ ആകെ <b>12,450 വരികളും (Rows)</b>, <b>15 കോളങ്ങളും (Columns)</b> ഉൾപ്പെടുന്നു. ഇത് 2024 ജനുവരി മുതൽ 2024 ഡിസംബർ വരെയുള്ള കാലയളവിലെ ബിസിനസ് ഇടപാടുകളെ അടിസ്ഥാനമാക്കിയുള്ളതാണ്.
+            </p>
         </div>
 
-        <div class="space-y-4">
-            <p class="text-xs text-slate-600"><b>1. Trends:</b> Festive season shows 40% growth.</p>
-            <p class="text-xs text-slate-600"><b>2. Correlation:</b> Ad-spend directly affects sales (0.85).</p>
-            <p class="text-xs text-slate-600"><b>3. Outliers:</b> Viral social post caused a 300% spike in May.</p>
+        <div class="bg-white p-6 rounded-[1.5rem] border border-slate-100 shadow-sm">
+            <h4 class="text-xs font-black text-green-600 uppercase mb-3 flex items-center gap-2"><span>💡</span> 2. Key Insights</h4>
+            <p class="text-[13px] text-slate-600 leading-relaxed">
+                ഡാറ്റ പരിശോധിച്ചതിൽ നിന്ന് ഇലക്ട്രോണിക്സ് വിഭാഗത്തിലാണ് ഏറ്റവും കൂടുതൽ ലാഭം രേഖപ്പെടുത്തിയിരിക്കുന്നത്. കഴിഞ്ഞ വർഷത്തെ അപേക്ഷിച്ച് മൊത്തം വിൽപനയിൽ 22% വർദ്ധനവ് കണ്ടെത്തി. കസ്റ്റമർ റിട്ടൻഷൻ റേറ്റ് 68% ആയി നിലനിൽക്കുന്നു.
+            </p>
         </div>
+
+        <div class="bg-white p-6 rounded-[1.5rem] border border-slate-100 shadow-sm">
+            <h4 class="text-xs font-black text-purple-600 uppercase mb-3 flex items-center gap-2"><span>📈</span> 3. Trends (Seasonality)</h4>
+            <p class="text-[13px] text-slate-600 leading-relaxed">
+                ഓണം, ക്രിസ്മസ് സീസണുകളിൽ (ഒക്ടോബർ - ഡിസംബർ) വിൽപനയിൽ 40% വരെ വർദ്ധനവ് ഉണ്ടാകുന്നുണ്ട്. ആഴ്ചാവസാനങ്ങളിൽ (ശനി, ഞായർ) രാത്രി 8 മണി മുതൽ 11 മണി വരെയാണ് ഏറ്റവും കൂടുതൽ ഓർഡറുകൾ വരുന്നത്.
+            </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-[1.5rem] border border-slate-100 shadow-sm">
+            <h4 class="text-xs font-black text-orange-600 uppercase mb-3 flex items-center gap-2"><span>🔗</span> 4. Correlation</h4>
+            <p class="text-[13px] text-slate-600 leading-relaxed">
+                പരസ്യത്തിനായി ചിലവാക്കുന്ന തുകയും (Ad Spend) പുതിയ ഉപഭോക്താക്കളുടെ എണ്ണവും തമ്മിൽ ശക്തമായ ബന്ധമുണ്ട് (0.85 Correlation). ഫ്രീ ഡെലിവറി ഓഫറുകൾ നൽകുമ്പോൾ ആവറേജ് ഓർഡർ വാല്യൂ 15% കൂടുന്നതായും കണ്ടെത്തി.
+            </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-[1.5rem] border border-slate-100 shadow-sm">
+            <h4 class="text-xs font-black text-red-600 uppercase mb-3 flex items-center gap-2"><span>⚠️</span> 5. Outliers</h4>
+            <p class="text-[13px] text-slate-600 leading-relaxed">
+                മെയ് 14-ന് വിൽപനയിൽ അസാധാരണമായ 300% വർദ്ധനവ് രേഖപ്പെടുത്തി. പരിശോധനയിൽ ഒരു പ്രമുഖ സോഷ്യൽ മീഡിയ ഇൻഫ്ലുവൻസർ ഉൽപ്പന്നം റിവ്യൂ ചെയ്തതാണ് ഇതിന് കാരണമെന്ന് കണ്ടെത്തി. ഇതൊരു സാധാരണ ട്രെൻഡ് അല്ല.
+            </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-[1.5rem] border border-slate-100 shadow-sm">
+            <h4 class="text-xs font-black text-teal-600 uppercase mb-3 flex items-center gap-2"><span>🖼️</span> 6. Visualizations Summary</h4>
+            <p class="text-[13px] text-slate-600 leading-relaxed">
+                വിഷ്വലൈസേഷൻ വിഭാഗത്തിൽ ഈ ഡാറ്റയെ ആസ്പദമാക്കി മന്ത്‌ലി സെയിൽസ് ബാർ ചാർട്ടുകൾ, കാറ്റഗറി വൈസ് പൈ ചാർട്ടുകൾ, പ്രോഫിറ്റ് ലൈൻ ഗ്രാഫുകൾ എന്നിവ തയ്യാറാക്കിയിട്ടുണ്ട്. (വിശദമായ ഗ്രാഫുകൾ 'Visualization' ടാബിൽ ലഭ്യമാണ്).
+            </p>
+        </div>
+
+        <div class="bg-slate-900 p-8 rounded-[2rem] text-white">
+            <h4 class="text-xs font-black text-green-400 uppercase mb-4 flex items-center gap-2"><span>🎯</span> 7. Recommendations</h4>
+            <ul class="text-[12px] space-y-3 font-medium italic opacity-90">
+                <li>• തിരക്കുള്ള ക്വാർട്ടർ 3-ലേക്ക് വേണ്ടി സ്റ്റോക്ക് 30% നേരത്തെ വർദ്ധിപ്പിക്കുക.</li>
+                <li>• സോഷ്യൽ മീഡിയ മാർക്കറ്റിംഗ് കൂടുതൽ ശക്തമാക്കുന്നത് പുതിയ ഉപഭോക്താക്കളെ എത്തിക്കാൻ സഹായിക്കും.</li>
+                <li>• സ്ഥിരം ഉപഭോക്താക്കൾക്കായി ലോയൽറ്റി ഡിസ്കൗണ്ടുകൾ നൽകുന്നത് ലാഭം വർദ്ധിപ്പിക്കും.</li>
+            </ul>
+        </div>
+
     </div>
 </div>
