@@ -1,1 +1,15 @@
-
+<div class="grid grid-cols-2 gap-4 w-full">
+    <div class="p-6 bg-slate-50 rounded-3xl border border-slate-100">
+        <p class="text-[10px] text-slate-400 font-bold uppercase mb-2">Most Sold Category</p>
+        <h4 class="text-2xl font-black text-slate-800">Electronics</h4>
+        <p class="text-[10px] text-green-500">+12% growth</p>
+    </div>
+    <div class="p-6 bg-slate-50 rounded-3xl border border-slate-100">
+        <p class="text-[10px] text-slate-400 font-bold uppercase mb-2">Customer Retention</p>
+        <h4 class="text-2xl font-black text-slate-800">68%</h4>
+        <p class="text-[10px] text-slate-400 italic text-blue-500">Repeat buyers</p>
+    </div>
+    <div class="col-span-2 p-4 bg-amber-50 rounded-2xl border border-amber-100">
+        <p class="text-xs font-medium text-amber-700">💡 <b>Insight:</b> 70% ഓഫ് വിൽപനയും നടക്കുന്നത് ശനി, ഞായർ ദിവസങ്ങളിലാണ്.</p>
+    </div>
+</div>
