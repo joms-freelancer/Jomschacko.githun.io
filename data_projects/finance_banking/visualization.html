@@ -1,1 +1,66 @@
+import plotly.express as px
+import plotly.graph_objects as go
+import pandas as pd
+import numpy as np
 
+# 1. സാമ്പിൾ ഫിനാൻഷ്യൽ ഡാറ്റ നിർമ്മിക്കുന്നു
+data = {
+    'Month': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    'Deposits': [10000, 12000, 11500, 14000, 15500, 17000],
+    'Loans': [5000, 4500, 6000, 5500, 7000, 8000],
+    'Category': ['Home', 'Car', 'Personal', 'Business', 'Education', 'Gold'],
+    'Applications': [450, 300, 600, 200, 150, 500],
+    'Age': [25, 34, 45, 23, 56, 41, 32, 29, 38, 48, 52, 27],
+    'Income': [50, 60, 120, 45, 150, 80, 70, 65, 90, 110, 130, 55],
+    'Spending': [30, 35, 70, 25, 90, 50, 40, 38, 55, 65, 80, 32]
+}
+
+df = pd.DataFrame(dict([(k, pd.Series(v)) for k, v in data.items()]))
+
+# വിഷ്വലൈസേഷനുകൾ താഴെ നൽകുന്നു:
+
+# A. Line Chart (Trends)
+fig1 = px.line(df, x='Month', y=['Deposits', 'Loans'], title='Monthly Deposit vs Loan Trends')
+
+# B. Bar Chart (Comparison)
+fig2 = px.bar(df.dropna(), x='Category', y='Applications', title='Loan Applications by Category')
+
+# C. Histogram (Distribution)
+fig3 = px.histogram(df, x='Age', nbins=5, title='Customer Age Distribution')
+
+# D. Box Plot (Outliers)
+# ചില വ്യാജ ഔട്ട്‌ലയർ ഡാറ്റ കൂടി ചേർക്കുന്നു
+box_data = pd.DataFrame({'Transaction_Amount': [100, 120, 150, 130, 110, 5000, 140, 160]}) 
+fig4 = px.box(box_data, y='Transaction_Amount', title='Transaction Outlier Detection')
+
+# E. Heatmap (Correlation)
+corr_df = df[['Income', 'Spending', 'Age']].corr()
+fig5 = px.imshow(corr_df, text_auto=True, title='Income, Spending, and Age Correlation')
+
+# F. Pie Chart (Share)
+fig6 = px.pie(df.dropna(), values='Applications', names='Category', title='Market Share of Loan Categories')
+
+# G. Scatter Plot (Relationship)
+fig7 = px.scatter(df, x='Income', y='Spending', size='Age', title='Income vs Spending Relationship')
+
+# H. Funnel Chart (Process)
+fig8 = go.Figure(go.Funnel(
+    y = ["Applications", "Verification", "Approved", "Disbursed"],
+    x = [1000, 800, 600, 550],
+    textinfo = "value+percent initial"))
+fig8.update_layout(title_text='Loan Approval Process Pipeline')
+
+# --- എല്ലാ ഗ്രാഫുകളെയും ഒരൊറ്റ HTML ഫയലിലേക്ക് മാറ്റുന്നു ---
+path = "data_projects/finance_banking/visualization.html"
+
+with open(path, 'a') as f:
+    f.write(fig1.to_html(full_html=False, include_plotlyjs='cdn'))
+    f.write(fig2.to_html(full_html=False, include_plotlyjs='cdn'))
+    f.write(fig3.to_html(full_html=False, include_plotlyjs='cdn'))
+    f.write(fig4.to_html(full_html=False, include_plotlyjs='cdn'))
+    f.write(fig5.to_html(full_html=False, include_plotlyjs='cdn'))
+    f.write(fig6.to_html(full_html=False, include_plotlyjs='cdn'))
+    f.write(fig7.to_html(full_html=False, include_plotlyjs='cdn'))
+    f.write(fig8.to_html(full_html=False, include_plotlyjs='cdn'))
+
+print(f"നിങ്ങളുടെ വിഷ്വലൈസേഷൻ ഫയൽ ഇവിടെ തയ്യാറാണ്: {path}")
