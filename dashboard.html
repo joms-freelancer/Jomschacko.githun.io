@@ -29,7 +29,6 @@
     </nav>
 
     <main class="max-w-7xl mx-auto p-6 md:p-10">
-        
         <header class="mb-12 text-center md:text-left">
             <h1 class="text-5xl md:text-6xl font-extrabold tracking-tighter mb-4 italic">
                 From Raw Data to <span class="text-green-600">Predictions.</span>
@@ -38,173 +37,91 @@
         </header>
 
         <div class="flex flex-wrap gap-3 mb-12 justify-center md:justify-start">
-            <button id="sec-retail" onclick="changeSector('retail')" class="active-sector px-8 py-3 bg-white border border-slate-200 rounded-2xl text-xs font-bold transition-all">RETAIL & E-COMM</button>
-            <button id="sec-finance" onclick="changeSector('finance')" class="px-8 py-3 bg-white border border-slate-200 rounded-2xl text-xs font-bold text-slate-400 hover:border-slate-400 transition-all">FINANCE & BANKING</button>
+            <button id="sec-retail" onclick="changeSector('retail_ecommerce')" class="active-sector px-8 py-3 bg-white border border-slate-200 rounded-2xl text-xs font-bold transition-all">RETAIL & E-COMM</button>
+            <button id="sec-finance" onclick="changeSector('finance_banking')" class="px-8 py-3 bg-white border border-slate-200 rounded-2xl text-xs font-bold text-slate-400 hover:border-slate-400 transition-all">FINANCE & BANKING</button>
             <button id="sec-healthcare" onclick="changeSector('healthcare')" class="px-8 py-3 bg-white border border-slate-200 rounded-2xl text-xs font-bold text-slate-400 hover:border-slate-400 transition-all">HEALTHCARE</button>
             <button id="sec-manufacturing" onclick="changeSector('manufacturing')" class="px-8 py-3 bg-white border border-slate-200 rounded-2xl text-xs font-bold text-slate-400 hover:border-slate-400 transition-all">MANUFACTURING</button>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-            
             <div class="lg:col-span-4 space-y-4">
                 <h2 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-6">Execution Workflow</h2>
-                
-                <button onclick="changeStep(1)" id="btn-step-1" class="active-step step-transition w-full p-6 border-2 border-slate-100 rounded-[2rem] text-left group">
-                    <div class="flex items-center gap-4">
-                        <span class="text-2xl">🧹</span>
-                        <div>
-                            <h3 class="font-bold text-lg">1. Data Cleaning</h3>
-                            <p class="text-xs text-slate-400">Preparation & Noise Removal</p>
-                        </div>
-                    </div>
+                <button onclick="changeStep(1, 'data_cleaning.py')" id="btn-step-1" class="active-step step-transition w-full p-6 border-2 border-slate-100 rounded-[2rem] text-left group">
+                    <div class="flex items-center gap-4"><span>🧹</span><div><h3 class="font-bold">1. Data Cleaning</h3><p class="text-xs text-slate-400">Preparation & Noise Removal</p></div></div>
                 </button>
-
-                <button onclick="changeStep(2)" id="btn-step-2" class="step-transition w-full p-6 border-2 border-slate-100 rounded-[2rem] text-left group">
-                    <div class="flex items-center gap-4">
-                        <span class="text-2xl">🔍</span>
-                        <div>
-                            <h3 class="font-bold text-lg">2. EDA Analysis</h3>
-                            <p class="text-xs text-slate-400">Deep Insights & Patterns</p>
-                        </div>
-                    </div>
+                <button onclick="changeStep(2, 'eda_analysis.py')" id="btn-step-2" class="step-transition w-full p-6 border-2 border-slate-100 rounded-[2rem] text-left group">
+                    <div class="flex items-center gap-4"><span>🔍</span><div><h3 class="font-bold">2. EDA Analysis</h3><p class="text-xs text-slate-400">Deep Insights & Patterns</p></div></div>
                 </button>
-
-                <button onclick="changeStep(3)" id="btn-step-3" class="step-transition w-full p-6 border-2 border-slate-100 rounded-[2rem] text-left group">
-                    <div class="flex items-center gap-4">
-                        <span class="text-2xl">📊</span>
-                        <div>
-                            <h3 class="font-bold text-lg">3. Visualization</h3>
-                            <p class="text-xs text-slate-400">Interactive Dashboards</p>
-                        </div>
-                    </div>
+                <button onclick="changeStep(3, 'visualization.py')" id="btn-step-3" class="step-transition w-full p-6 border-2 border-slate-100 rounded-[2rem] text-left group">
+                    <div class="flex items-center gap-4"><span>📊</span><div><h3 class="font-bold">3. Visualization</h3><p class="text-xs text-slate-400">Interactive Dashboards</p></div></div>
                 </button>
-
-                <button onclick="changeStep(4)" id="btn-step-4" class="step-transition w-full p-6 border-2 border-slate-100 rounded-[2rem] text-left group">
-                    <div class="flex items-center gap-4">
-                        <span class="text-2xl">🧠</span>
-                        <div>
-                            <h3 class="font-bold text-lg">4. AI & ML Models</h3>
-                            <p class="text-xs text-slate-400">Predictive Engine Integration</p>
-                        </div>
-                    </div>
+                <button onclick="changeStep(4, 'ai_ml_models.py')" id="btn-step-4" class="step-transition w-full p-6 border-2 border-slate-100 rounded-[2rem] text-left group">
+                    <div class="flex items-center gap-4"><span>🧠</span><div><h3 class="font-bold">4. AI & ML Models</h3><p class="text-xs text-slate-400">Predictive Engine Integration</p></div></div>
                 </button>
-
-                <button onclick="changeStep(5)" id="btn-step-5" class="step-transition w-full p-6 border-2 border-slate-100 rounded-[2rem] text-left group">
-                    <div class="flex items-center gap-4">
-                        <span class="text-2xl">📑</span>
-                        <div>
-                            <h3 class="font-bold text-lg">5. Auto-Reporting</h3>
-                            <p class="text-xs text-slate-400">Direct Intelligence Delivery</p>
-                        </div>
-                    </div>
+                <button onclick="changeStep(5, 'auto_reporting.py')" id="btn-step-5" class="step-transition w-full p-6 border-2 border-slate-100 rounded-[2rem] text-left group">
+                    <div class="flex items-center gap-4"><span>📑</span><div><h3 class="font-bold">5. Auto-Reporting</h3><p class="text-xs text-slate-400">Direct Intelligence Delivery</p></div></div>
                 </button>
             </div>
 
             <div class="lg:col-span-8">
-                <div class="bg-white border-2 border-slate-100 rounded-[3.5rem] p-8 md:p-12 shadow-2xl shadow-slate-200/50 min-h-[600px] flex flex-col transition-all">
-                    
+                <div id="display-card" class="bg-white border-2 border-slate-100 rounded-[3.5rem] p-8 md:p-12 shadow-2xl shadow-slate-200/50 min-h-[600px] flex flex-col transition-all">
                     <div class="mb-10 flex justify-between items-start">
-                        <div>
-                            <h2 id="display-title" class="text-3xl font-black tracking-tighter text-slate-800">Step 1: Data Cleaning</h2>
-                            <p id="display-desc" class="text-slate-500 mt-2 italic font-serif">തിരഞ്ഞെടുത്ത സെക്ടറിലെ റോ ഡാറ്റ (Raw Data) ക്ലീൻ ചെയ്ത് ഉപയോഗപ്രദമാക്കുന്നു.</p>
+                        <div id="text-area">
+                            <h2 id="display-title" class="text-3xl font-black tracking-tighter text-slate-800">Loading...</h2>
+                            <p id="display-desc" class="text-slate-500 mt-2 italic font-serif">ഡാറ്റ ലോഡ് ചെയ്യുന്നു.</p>
                         </div>
-                        <div id="status-chip" class="px-4 py-1.5 bg-green-100 text-green-700 text-[10px] font-bold rounded-full uppercase">Processing</div>
+                        <div id="status-chip" class="px-4 py-1.5 bg-green-100 text-green-700 text-[10px] font-bold rounded-full uppercase">Live</div>
                     </div>
-
                     <div id="display-content" class="flex-grow flex flex-col justify-center items-center">
                         </div>
-
-                    <div class="mt-10 pt-8 border-t border-slate-50 flex flex-col md:flex-row justify-between items-center gap-4">
-                        <div class="flex gap-2">
-                            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
-                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">System Optimal</span>
-                        </div>
-                        <p class="text-[11px] text-slate-300 font-medium">Data source: Simulated Industry Environment</p>
-                    </div>
-
                 </div>
             </div>
-
         </div>
     </main>
 
     <script>
-        let currentSector = 'retail';
-        let currentStep = 1;
+        let currentSector = 'retail_ecommerce';
+        let currentFile = 'data_cleaning.py';
 
-        const dataStore = {
-            retail: {
-                name: "Retail & E-commerce",
-                1: { title: "Data Cleaning", desc: "Missing Prices ശരിയാക്കി, Duplicate എൻട്രികൾ നീക്കം ചെയ്തു.", content: `<div class="w-full overflow-hidden rounded-2xl border border-slate-100 shadow-sm">
-                    <table class="w-full text-left text-sm"><tr class="bg-slate-50 border-b">
-                    <th class="p-4 uppercase text-[10px] font-bold">Item</th><th class="p-4 uppercase text-[10px] font-bold">Status</th></tr>
-                    <tr><td class="p-4">Smartphone</td><td class="p-4 text-green-500 font-bold">CLEANED</td></tr>
-                    <tr class="bg-slate-50/50"><td class="p-4">Macbook Pro</td><td class="p-4 text-green-500 font-bold">CLEANED</td></tr>
-                    </table></div>` },
-                2: { title: "EDA Insights", desc: "ഉപഭോക്താക്കൾ ഏറ്റവും കൂടുതൽ സാധനങ്ങൾ വാങ്ങുന്നത് വൈകുന്നേരം 7 മണിക്ക് ശേഷമാണെന്ന് കണ്ടെത്തി.", content: `<div class="grid grid-cols-2 gap-4 w-full">
-                    <div class="p-6 bg-slate-50 rounded-3xl text-center"><p class="text-[10px] text-slate-400 font-bold uppercase mb-2">Avg Order</p><h4 class="text-3xl font-black text-slate-800">$240</h4></div>
-                    <div class="p-6 bg-slate-50 rounded-3xl text-center"><p class="text-[10px] text-slate-400 font-bold uppercase mb-2">Peak Time</p><h4 class="text-3xl font-black text-green-600">7:00 PM</h4></div>
-                    </div>` },
-                3: { title: "Visual Dashboard", desc: "മാസത്തെ വിൽപന വളർച്ച ഗ്രാഫ് രൂപത്തിൽ.", content: `<div class="w-full h-40 flex items-end gap-2 justify-center">
-                    <div class="w-8 bg-green-200 h-1/2 rounded-t-lg"></div><div class="w-8 bg-green-300 h-2/3 rounded-t-lg"></div><div class="w-8 bg-green-500 h-full rounded-t-lg"></div>
-                    </div><p class="mt-4 text-[10px] text-slate-400 font-bold">JAN - FEB - MAR Sales Growth</p>` },
-                4: { title: "AI Predictions", desc: "അടുത്ത മാസം വിൽപനയിൽ 15% വർദ്ധനവ് ഉണ്ടാകുമെന്ന് AI പ്രവചിക്കുന്നു.", content: `<div class="p-10 bg-green-600 rounded-[2.5rem] text-white text-center w-full">
-                    <h4 class="text-5xl font-black mb-2">92%</h4><p class="text-xs uppercase font-bold tracking-widest opacity-80">Prediction Accuracy</p>
-                    </div>` },
-                5: { title: "Auto-Reporting", desc: "പൂർണ്ണമായ വിൽപന റിപ്പോർട്ട് തയ്യാറാണ്.", content: `<button class="px-10 py-4 bg-slate-900 text-white rounded-full font-bold text-xs hover:bg-black transition">DOWNLOAD PDF REPORT</button>` }
-            },
-            finance: {
-                name: "Finance & Banking",
-                1: { title: "Data Cleaning", desc: "അസ്വാഭാവികമായ ട്രാൻസാക്ഷനുകൾ തരംതിരിച്ചു.", content: `<div class="p-6 bg-red-50 border border-red-100 rounded-3xl text-center"><h4 class="text-red-600 font-bold">12 Fraudulent Pins Detected</h4><p class="text-xs text-red-400 mt-2">Removed from main ledger</p></div>` },
-                2: { title: "Risk EDA", desc: "ക്രെഡിറ്റ് കാർഡ് ഉപയോഗിക്കുന്നവരിലെ റിസ്ക് ഫാക്ടറുകൾ വിശകലനം ചെയ്തു.", content: `<div class="space-y-3 w-full"><div class="h-2 bg-slate-100 rounded-full w-full"><div class="h-full bg-red-400 rounded-full" style="width: 25%"></div></div><p class="text-[10px] font-bold text-slate-400 uppercase">High Risk Ratio: 25%</p></div>` },
-                3: { title: "Visualization", desc: "ലോൺ തിരിച്ചടവ് നിരക്കുകൾ കാണിക്കുന്ന ഡാഷ്ബോർഡ്.", content: `<div class="w-32 h-32 border-[12px] border-blue-500 rounded-full border-t-slate-100 animate-spin-slow"></div><p class="mt-6 text-xs font-bold">88% Repayment Rate</p>` },
-                4: { title: "Credit AI Engine", desc: "ലോൺ അപേക്ഷകരുടെ ക്രെഡിറ്റ് സ്കോർ തൽക്ഷണം പ്രവചിക്കുന്നു.", content: `<div class="bg-blue-600 p-8 rounded-[3rem] text-white w-full text-center"><p class="text-[10px] font-bold opacity-70 uppercase mb-2">Approved Limit</p><h4 class="text-4xl font-black">$50,000</h4></div>` },
-                5: { title: "Audit Reporting", desc: "റിസർവ് ബാങ്ക് മാനദണ്ഡങ്ങൾ പ്രകാരമുള്ള റിപ്പോർട്ട്.", content: `<button class="px-10 py-4 bg-blue-900 text-white rounded-full font-bold text-xs">GENERATE AUDIT DOC</button>` }
+        // ഫയലുകൾ ലോഡ് ചെയ്യാനുള്ള ഫംഗ്ഷൻ
+        async function loadProjectData(sector, file) {
+            const contentArea = document.getElementById('display-content');
+            contentArea.innerHTML = '<div class="animate-pulse text-slate-300">Fetching Data...</div>';
+            
+            try {
+                // GitHub Path: data_projects/sector_name/file_name
+                const response = await fetch(`data_projects/${sector}/${file}`);
+                const data = await response.text();
+                
+                // ഫയലിനുള്ളിൽ നമ്മൾ എഴുതുന്ന HTML കണ്ടന്റ് ഇവിടെ ഡിസ്‌പ്ലേ ചെയ്യും
+                contentArea.innerHTML = data;
+                
+                // ടൈറ്റിൽ അപ്‌ഡേറ്റ് ചെയ്യാൻ
+                document.getElementById('display-title').innerText = file.replace('.py', '').replace('_', ' ').toUpperCase();
+                document.getElementById('display-desc').innerText = `${sector.replace('_', ' ')} മേഖലയിലെ വിശകലനം.`;
+            } catch (error) {
+                contentArea.innerHTML = `<div class="text-red-400">Error: ഫയൽ കണ്ടെത്താനായില്ല. (${file})</div>`;
             }
-            // ... Similarly Healthcare and Manufacturing can be added or mapped.
-        };
+        }
 
         function changeSector(sector) {
             currentSector = sector;
+            // UI Update
             document.querySelectorAll('[id^="sec-"]').forEach(btn => btn.classList.remove('active-sector'));
-            document.getElementById('sec-' + sector).classList.add('active-sector');
-            updateDisplay();
+            event.target.classList.add('active-sector');
+            loadProjectData(currentSector, currentFile);
         }
 
-        function changeStep(step) {
-            currentStep = step;
+        function changeStep(stepNumber, fileName) {
+            currentFile = fileName;
+            // UI Update
             document.querySelectorAll('[id^="btn-step-"]').forEach(btn => btn.classList.remove('active-step'));
-            document.getElementById('btn-step-' + step).classList.add('active-step');
-            updateDisplay();
+            document.getElementById(`btn-step-${stepNumber}`).classList.add('active-step');
+            loadProjectData(currentSector, currentFile);
         }
 
-        function updateDisplay() {
-            // Mapping for other two sectors if not fully detailed in store
-            const sectorDataMap = dataStore[currentSector] || dataStore['retail'];
-            const stepInfo = sectorDataMap[currentStep];
-
-            document.getElementById('display-title').innerText = "Step " + currentStep + ": " + stepInfo.title;
-            document.getElementById('display-desc').innerText = stepInfo.desc;
-            document.getElementById('display-content').innerHTML = stepInfo.content;
-            
-            // Animation effect
-            const content = document.getElementById('display-content');
-            content.style.opacity = 0;
-            content.style.transform = 'translateY(10px)';
-            setTimeout(() => {
-                content.style.opacity = 1;
-                content.style.transform = 'translateY(0)';
-            }, 50);
-        }
-
-        // Initialize
-        updateDisplay();
+        // ആദ്യം റീട്ടെയ്ൽ ഡാറ്റ കാണിക്കുക
+        window.onload = () => loadProjectData('retail_ecommerce', 'data_cleaning.py');
     </script>
-
-    <style>
-        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .animate-spin-slow { animation: spin-slow 3s linear infinite; }
-    </style>
-
 </body>
 </html>
